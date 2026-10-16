@@ -37,6 +37,12 @@ description: "Método aprovado pelo Diego (16/10/2026) para produzir os vídeos 
   (`tools/split_voice.py`) e cada cena da gravação dura **o tempo da sua voz** (+0,55 s). A voz de cada cena é colocada
   exatamente no início da sua cena → sincronia perfeita, sem esticar nada.
 - Se as ações de uma cena forem mais longas do que a voz, o motor avisa; encurtar as esperas até não haver avisos grandes.
+- Cena com muitas ações (ex.: formulário com vários combos): **alongar a frase da Bia** para cobrir as ações — nunca deixar mais de ~1,5 s de silêncio a mais.
+- Pode gerar-se a voz de **vários vídeos de uma vez** (≤ 5.000 carateres) e distribuir as cenas por vídeo. O MP3 descarregado tem no nome a hora **UTC do fim** da geração.
+
+## 3.1 Zero erros à vista
+- Ver no controlo de qualidade o frame **a seguir a cada confirmação** (guardar, eliminar). Se o sistema mostrar um erro, muda-se o passo (ex.: mostrar a confirmação e clicar «Não») e regrava-se.
+- Menus de dois níveis (CRM › Pós-venda › …) com `menu2()`; combos seguidos com `pickFast()`.
 
 ## 4. Dados das gravações
 - Grava-se numa **cópia local** do Go Auto com a **base de demonstração da Matriz** (a mesma que está em produção:
@@ -68,5 +74,6 @@ description: "Método aprovado pelo Diego (16/10/2026) para produzir os vídeos 
 
 ## 7. Nomes e entrega
 - `crm01_painel_do_dia.mp4`, `crm02_prospecao.mp4`, … (módulo + nº + submódulo, sem acentos).
-- Um vídeo por submódulo do menu. Ordem da série: Conta → CRM → Vendas → Produção → restantes.
+- Um vídeo por submódulo do menu (exceto ecrãs que o Diego vai retirar — ex.: «Viaturas dos clientes» não tem vídeo).
+- Série CRM (5): `crm01_painel_do_dia`, `crm02_prospecao`, `crm03_clientes`, `crm04_pesquisas_satisfacao`, `crm05_indicadores_qualidade`. Ordem da série: Conta → CRM → Vendas → Produção → restantes.
 - Full HD 1920×1080, 30 fps, H.264 CRF 17, AAC 192 kbps, +faststart.

@@ -123,11 +123,21 @@ class Rec {
     if (ringIt) await this.ring(side(item), 4, 8);
     await this.click(side(item), 650); await this.off(); await this.settle(1500);
   }
+  // menu de dois níveis (ex.: CRM › Pós-venda › Pesquisas de satisfação)
+  async menu2(g1, g2, item) {
+    const side = t => this.p.locator('#ga-side a').filter({ hasText: new RegExp('^\\s*' + t + '\\s*$') }).first();
+    const reach = async l => { try { const b = await l.boundingBox({ timeout: 1500 }); if (!b || b.height < 4) return false; return await l.evaluate((e, [x, y]) => { const t = document.elementFromPoint(x, y); return !!t && (t === e || e.contains(t) || t.contains(e)); }, [b.x + b.width / 2, b.y + b.height / 2]); } catch (e) { return false; } };
+    if (!(await reach(side(item)))) {
+      if (!(await reach(side(g2)))) { await this.click(side(g1), 550, 150); await sleep(450); }
+      await this.click(side(g2), 500, 150); await sleep(450);
+    }
+    await this.ring(side(item), 4, 8); await this.click(side(item), 500, 200); await this.off(); await sleep(600);
+  }
   async box(sel) { const l = typeof sel === 'string' ? this.p.locator(sel).filter({ visible: true }).first() : sel; await l.waitFor({ state: 'visible', timeout: 8000 }); return await l.boundingBox(); }
   async to(sel, ms, dx = .5, dy = .5) { const b = await this.box(sel); await this.move(b.x + b.width * dx, b.y + b.height * dy, ms); return b; }
   async click(sel, ms = 650, pause = 250) { const b = await this.to(sel, ms); await sleep(pause); await this.p.mouse.down(); await sleep(70); await this.p.mouse.up(); return b; }
   async type(sel, text, delay = 75) { await this.click(sel); await sleep(200); for (const ch of text) { await this.p.keyboard.type(ch); await sleep(this.dry ? 0 : delay + Math.random() * 35); } }
-  async ring(sel, pad = 8, rad) { const list = Array.isArray(sel) ? sel : [sel]; const rs = []; for (const s of list) { const b = await this.box(s); rs.push([b.x - pad, b.y - pad, b.width + 2 * pad, b.height + 2 * pad, rad]); } await this.p.evaluate(r => window.__ring(r), rs); }
+  async ring(sel, pad = 8, rad) { const list = Array.isArray(sel) ? sel : [sel]; const rs = []; for (const s of list) { const b = await this.box(s); let x = Math.max(6, b.x - pad), y = Math.max(6, b.y - pad), x2 = Math.min(1914, b.x + b.width + pad), y2 = Math.min(1074, b.y + b.height + pad); rs.push([x, y, x2 - x, y2 - y, rad]); } await this.p.evaluate(r => window.__ring(r), rs); }
   async ringXY(x, y, w, h, rad) { await this.p.evaluate(r => window.__ring(r), [[x, y, w, h, rad]]); }
   async arrow(sel, ang = 200, len = 150, side = 'right') { const b = await this.box(sel); const tx = side === 'right' ? b.x + b.width + 6 : side === 'left' ? b.x - 6 : b.x + b.width / 2; const ty = side === 'bottom' ? b.y + b.height + 6 : side === 'top' ? b.y - 6 : b.y + b.height / 2; await this.p.evaluate(([a, b, c, d]) => window.__arrow(a, b, c, d), [tx, ty, ang, len]); }
   async off() { try { await this.p.evaluate(() => window.__ringOff && window.__ringOff()); } catch (e) {} await sleep(250); }
@@ -140,6 +150,15 @@ class Rec {
     if (search && await sf.isVisible().catch(() => false)) { for (const ch of search) { await this.p.keyboard.type(ch); await this.wait(110); } await sleep(900); }
     const opt = this.p.locator('.select2-container--open .select2-results__option', { hasText: text }).first();
     await this.to(opt, 450); await this.wait(250); await opt.click(); await sleep(400);
+  }
+  // pick rápido: pesquisa curta e escolha imediata
+  async pickFast(name, text, search) {
+    const s2 = this.p.locator(`select[name="${name}"] + .select2 .select2-selection`).first();
+    await this.click(s2, 420); await sleep(200);
+    const f = this.p.locator('.select2-container--open .select2-search__field').first();
+    if (search && await f.isVisible().catch(() => false)) { for (const ch of search) { await this.p.keyboard.type(ch); await this.wait(50); } await sleep(this.dry ? 150 : 400); }
+    const opt = this.p.locator('.select2-container--open .select2-results__option', { hasText: text }).first();
+    await this.to(opt, 260); await opt.click(); await sleep(200);
   }
   async scrollEl(sel, dy, ms = 900) { // rolagem suave no contentor principal
     const steps = Math.max(1, Math.round(ms / 16));

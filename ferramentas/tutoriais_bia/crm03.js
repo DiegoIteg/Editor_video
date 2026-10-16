@@ -12,7 +12,7 @@ module.exports = {
   scenes: [
     { id: 's01', est: 9, say: 'Olá, eu sou a Bia, a tua assistente de formação, e hoje vou ensinar-te a trabalhar com o Cadastro de clientes, o coração do CRM, onde fica guardada toda a informação de cada cliente.',
       act: async r => { await r.move(1100, 560, 900); } },
-    { id: 's02', est: 5, say: 'Para lá chegar, abres o CRM no menu e escolhes Clientes.',
+    { id: 's02', est: 5, say: 'Para lá chegar, abres o módulo CRM no menu do lado esquerdo e escolhes a opção Clientes.',
       act: async r => { await r.menu('CRM', 'Clientes'); } },
     { id: 's03', est: 9, say: 'Esta é a lista de clientes, com o número, o nome, o tipo, se é particular ou empresa, e o grupo. Os clientes mais recentes aparecem primeiro, e em baixo mudas de página.',
       act: async r => {
@@ -54,21 +54,21 @@ module.exports = {
       } },
     { id: 's10', est: 9, say: 'Na identificação escreves o nome da empresa e o número de contribuinte. O NIF é opcional, mas convém tê-lo para a faturação.',
       act: async r => { await r.type('input[name="nome"]', NOME, 70); await r.wait(300); await r.type('input[name="nif"]', '517248638', 110); } },
-    { id: 's11', est: 14, say: 'Na morada indicas o tipo, a rua e o número, o concelho, o distrito, o país e o código postal. Podes juntar mais do que uma morada com o botão de mais.',
+    { id: 's11', est: 14, say: 'Na morada indicas o tipo de morada, aqui comercial, e depois a rua e o número da porta. A seguir escolhes o concelho, o distrito e o país, que encontras a escrever as primeiras letras, e por fim o código postal. Se o cliente tiver mais do que uma morada, por exemplo a sede e um armazém, juntas outra com o botão de mais.',
       act: async r => {
-        await r.pick('morada_pessoa_tipo_morada_id[]', 'Comercial');
-        await r.type('input[name="morada_pessoa_morada[]"]', 'Rua do Comércio', 70); await r.type('input[name="morada_pessoa_numero[]"]', '125', 110);
-        await r.pick('morada_pessoa_conselho_id[]', 'São João da Madeira', 'São João');
-        await r.pick('morada_pessoa_distrito_id[]', 'Aveiro', 'Aveir'); await r.pick('morada_pessoa_pais_id[]', 'Portugal', 'Portu');
-        await r.type('input[name="morada_pessoa_cep[]"]', '3700-123', 100);
-        const plus = r.p.locator('.tab-pane.active i.fa-plus, .tab-pane.active .fa-plus').filter({ visible: true }).first(); await r.ring(plus, 8, 8); await r.to(plus, 500);
+        await r.pickFast('morada_pessoa_tipo_morada_id[]', 'Comercial', 'Com');
+        await r.type('input[name="morada_pessoa_morada[]"]', 'Rua do Comércio', 40); await r.type('input[name="morada_pessoa_numero[]"]', '125', 60);
+        await r.pickFast('morada_pessoa_conselho_id[]', 'São João da Madeira', 'São J');
+        await r.pickFast('morada_pessoa_distrito_id[]', 'Aveiro', 'Ave'); await r.pickFast('morada_pessoa_pais_id[]', 'Portugal', 'Port');
+        await r.type('input[name="morada_pessoa_cep[]"]', '3700-123', 50);
+        const plus = r.p.locator('.tab-pane.active i.fa-plus, .tab-pane.active .fa-plus').filter({ visible: true }).first(); await r.ring(plus, 8, 8); await r.to(plus, 350);
       } },
-    { id: 's12', est: 11, say: 'No separador dos contactos, o tipo de contacto, o telefone fixo ou o telemóvel e o e-mail. É para aqui que o sistema envia os orçamentos e os avisos ao cliente.',
+    { id: 's12', est: 11, say: 'No separador dos contactos escolhes o tipo de contacto e escreves o telefone fixo ou o telemóvel, e o e-mail. É para aqui que o sistema envia os orçamentos e os avisos ao cliente, por isso confirma sempre o e-mail.',
       act: async r => {
-        await r.off(); await r.click(r.el('CONTATOS', 'a,li,span'), 600); await r.wait(600);
-        await r.pick('contatos_pessoa_tipo_contato_id[]', 'Comercial');
-        await r.type('input[name="contatos_pessoa_movel[]"]', '913 452 781', 90);
-        await r.type('input[name="contatos_pessoa_email[]"]', 'geral@autopecasfonseca.exemplo.pt', 55);
+        await r.off(); await r.click(r.el('CONTATOS', 'a,li,span'), 500); await r.wait(300);
+        await r.pickFast('contatos_pessoa_tipo_contato_id[]', 'Comercial', 'Com');
+        await r.type('input[name="contatos_pessoa_movel[]"]', '913 452 781', 55);
+        await r.type('input[name="contatos_pessoa_email[]"]', 'geral@autopecasfonseca.exemplo.pt', 32);
       } },
     { id: 's13', est: 8, say: 'Nos Links guardas o site e as redes sociais da empresa, e na Identificação outros documentos fiscais, se precisares.',
       act: async r => { for (const t of ['LINKS', 'IDENTIFICAÇÃO']) { await r.click(r.el(t, 'a,li,span'), 600); await r.wait(1500); } await r.click(r.el('MORADA', 'a,li,span'), 500); } },
@@ -83,7 +83,7 @@ module.exports = {
         await r.ring(rowOf(r, 'Fonseca'), 4, 8); await r.to(rowOf(r, 'Fonseca'), 700, .4);
       } },
     { id: 's16', est: 8, say: 'Na lupa abres a ficha completa, com os dados, as moradas e os contactos.',
-      act: async r => { await r.off(); await r.click(rowOf(r, 'Fonseca').locator('i').first(), 600); await r.settle(1300); for (const t of ['Morada', 'CONTATOS']) { const tb = r.el(new RegExp('^\\s*' + t + '\\s*$', 'i'), 'a,li,span'); if (await tb.count()) { await r.click(tb, 500); await r.wait(900); } } } },
+      act: async r => { await r.off(); await r.click(rowOf(r, 'Fonseca').locator('i').first(), 600); await r.settle(1300); for (const t of ['Morada', 'CONTATOS']) { const tb = r.el(new RegExp('^\\s*' + t + '\\s*$', 'i'), 'a,li,span'); if (await tb.count()) { await r.click(tb, 420); await r.wait(500); } } } },
     { id: 's17', est: 8, say: 'E no lápis, o mesmo formulário abre já preenchido, para corrigires ou acrescentares o que for preciso.',
       act: async r => {
         await sleep(600); await r.click(await r.hit('Fechar', 'a,button,span'), 500); await r.settle(700); await r.click(rowOf(r, 'Fonseca').locator(T('Editar')).first(), 600); await r.settle(1400);
@@ -92,10 +92,10 @@ module.exports = {
     { id: 's18', est: 10, say: 'Para eliminar um cliente, usas o caixote. O sistema pede sempre confirmação antes de apagar, para não perderes dados por engano.',
       act: async r => {
         await r.off(); await r.click(r.el('Voltar', 'a,button,span'), 600); await r.settle(1300);
-        const del = rowOf(r, 'Fonseca').locator(T('Eliminar')).first(); await r.ring(del, 8, 8); await r.click(del, 700); await r.off(); await r.wait(1200);
-        const sim = r.el(/^\s*Sim\s*$/, 'button,a,span'); await r.ring(sim, 6, 8); await r.to(sim, 600); await r.wait(900); await r.off(); await r.click(sim, 300); await r.settle(1400);
+        const del = rowOf(r, 'Fonseca').locator(T('Eliminar')).first(); await r.ring(del, 8, 8); await r.click(del, 550); await r.off(); await r.wait(800);
+        const sim = r.el(/^\s*Sim\s*$/, 'button,a,span'); const nao = r.el(/^\s*Não\s*$/, 'button,a,span'); await r.ring([sim, nao], 6, 8); await r.to(sim, 450); await r.wait(700); await r.to(nao, 400); await r.wait(500); await r.off(); await r.click(nao, 300); await r.settle(800);
       } },
-    { id: 's19', est: 9, say: 'E assim dominas o Cadastro de clientes. No próximo vídeo vamos às Viaturas dos clientes. Eu sou a Bia, a tua assistente de formação. Até já!',
+    { id: 's19', est: 9, say: 'E assim dominas o Cadastro de clientes. No próximo vídeo vamos às Pesquisas de satisfação. Eu sou a Bia, a tua assistente de formação. Até já!',
       act: async r => { await r.move(1100, 600, 800); } },
   ],
 };
