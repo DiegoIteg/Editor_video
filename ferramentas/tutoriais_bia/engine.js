@@ -2,7 +2,7 @@
 // escrita incremental, cenas cronometradas pela voz. Grava com CDP screencast (JPEG q92).
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
-const BASE = 'http://127.0.0.1:8770';
+const BASE = process.env.GA_BASE || 'http://127.0.0.1:8770';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 const INIT = () => {
@@ -63,7 +63,7 @@ class Rec {
   }
   async start() {
     fs.rmSync(this.dir, { recursive: true, force: true }); fs.mkdirSync(path.join(this.dir, 'frames'), { recursive: true });
-    this.b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--force-device-scale-factor=1', '--font-render-hinting=none'] });
+    this.b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--force-device-scale-factor=1', '--font-render-hinting=none', '--lang=pt-PT'] });
     this.c = await this.b.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1, locale: 'pt-PT', timezoneId: 'Europe/Lisbon' });
     await this.c.addInitScript(INIT);
     this.p = await this.c.newPage();
@@ -111,7 +111,7 @@ class Rec {
   async hit(t, tags = 'a,button,span,div,label,li') {
     const l = this.el(t, tags).locator('xpath=.'); const all = this.p.locator(tags).filter({ hasText: t instanceof RegExp ? t : new RegExp('^\\s*' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*$') }).filter({ visible: true });
     const n = await all.count();
-    for (let i = n - 1; i >= 0; i--) { const c = all.nth(i); const ok = await c.evaluate(e => { const b = e.getBoundingClientRect(); if (b.width < 2 || b.x < 0 || b.y < 0 || b.x > innerWidth - 2 || b.y > innerHeight - 2) return false; const t = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return !!t && (t === e || e.contains(t) || t.contains(e)); }).catch(() => false); if (ok) return c; }
+    for (let i = n - 1; i >= 0; i--) { const c = all.nth(i); const ok = await c.evaluate(e => { const b = e.getBoundingClientRect(); if (b.width < 2 || b.x < 0 || b.y < 0 || b.x > innerWidth - 2 || b.y > innerHeight - 2) return false; const t = document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2); return !!t && (t === e || e.contains(t)); }).catch(() => false); if (ok) return c; }
     return this.el(t, tags);
   }
   vis(l) { return (typeof l === 'string' ? this.p.locator(l) : l).filter({ visible: true }).first(); }
@@ -126,12 +126,24 @@ class Rec {
   // menu de dois níveis (ex.: CRM › Pós-venda › Pesquisas de satisfação)
   async menu2(g1, g2, item) {
     const side = t => this.p.locator('#ga-side a').filter({ hasText: new RegExp('^\\s*' + t + '\\s*$') }).first();
-    const reach = async l => { try { const b = await l.boundingBox({ timeout: 1500 }); if (!b || b.height < 4) return false; return await l.evaluate((e, [x, y]) => { const t = document.elementFromPoint(x, y); return !!t && (t === e || e.contains(t) || t.contains(e)); }, [b.x + b.width / 2, b.y + b.height / 2]); } catch (e) { return false; } };
+    const reach = async l => { try { const b = await l.boundingBox({ timeout: 1500 }); if (!b || b.height < 4) return false; return await l.evaluate((e, [x, y]) => { const t = document.elementFromPoint(x, y); return !!t && (t === e || e.contains(t)); }, [b.x + b.width / 2, b.y + b.height / 2]); } catch (e) { return false; } };
     if (!(await reach(side(item)))) {
       if (!(await reach(side(g2)))) { await this.click(side(g1), 550, 150); await sleep(450); }
       await this.click(side(g2), 500, 150); await sleep(450);
     }
     await this.ring(side(item), 4, 8); await this.click(side(item), 500, 200); await this.off(); await sleep(600);
+  }
+  // menu dentro de um grupo (evita itens com o mesmo nome noutros módulos, ex.: «Painel do dia»)
+  async menuG(group, item, sub = null) {
+    const side = t => this.p.locator('#ga-side a').filter({ hasText: new RegExp('^\\s*' + t + '\\s*$', 'i') }).first();
+    const g = side(group); const li = g.locator('xpath=..');
+    const inLi = (root, t) => root.locator('a').filter({ hasText: new RegExp('^\\s*' + t + '\\s*$', 'i') }).first();
+    const reach = async l => { try { const b = await l.boundingBox({ timeout: 1500 }); if (!b || b.height < 4) return false; return await l.evaluate((e, [x, y]) => { const t = document.elementFromPoint(x, y); return !!t && (t === e || e.contains(t)); }, [b.x + b.width / 2, b.y + b.height / 2]); } catch (e) { return false; } };
+    let target;
+    if (sub) { const s = inLi(li, sub); target = inLi(s.locator('xpath=following-sibling::div[1]'), item);
+      if (!(await reach(target))) { if (!(await reach(s))) { await this.click(g, 450, 120); await sleep(380); } await this.click(s, 420, 120); await sleep(380); } }
+    else { target = inLi(li, item); if (!(await reach(target))) { await this.click(g, 450, 120); await sleep(380); } }
+    await this.ring(target, 4, 8); await this.click(target, 420, 150); await this.off(); await sleep(500);
   }
   async box(sel) { const l = typeof sel === 'string' ? this.p.locator(sel).filter({ visible: true }).first() : sel; await l.waitFor({ state: 'visible', timeout: 8000 }); return await l.boundingBox(); }
   async to(sel, ms, dx = .5, dy = .5) { const b = await this.box(sel); await this.move(b.x + b.width * dx, b.y + b.height * dy, ms); return b; }

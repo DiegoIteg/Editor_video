@@ -1,0 +1,33 @@
+// BUSINESS · Vídeo 1 — Painel da Direção
+const { C, btn, kpi, card, goTo, top, kpis, show } = require('./bushelp');
+module.exports = {
+  name: 'bus01_painel_direcao',
+  titulo: 'Painel da Direção', subtitulo: 'O mês da empresa, o que precisa de decisão e cada área com semáforos', n: 1, modulo: 'BUSINESS',
+  start: async r => { await r.open('BusinessPainelDirecao'); await r.settle(800); },
+  scenes: [
+    { id: 's01', est: 9, say: 'Olá, eu sou a Bia, a tua assistente de formação, e hoje começamos o módulo Business com o Painel da Direção: a empresa inteira num só ecrã.',
+      act: async r => { await r.move(1100, 560, 900); } },
+    { id: 's02', est: 5, say: 'No menu, abres Business e escolhes Painel da Direção.',
+      act: async r => { await r.menuG('BUSINESS', 'Painel da Direção'); await r.settle(800); } },
+    { id: 's03', est: 9, say: 'Nos atalhos vais ao modelo de negócio, ao plano anual, ao real contra o objetivo, ao fluxo de caixa, aos resultados e às filiais.',
+      act: async r => { for (const t of ['Modelo de negócio', 'Plano anual', 'Real vs objetivo', 'Fluxo de caixa', 'DRE', 'Filiais']) { const b = btn(r, t); await r.ring(b, 4, 8); await r.to(b, 280); await r.wait(500); } await r.off(); } },
+    { id: 's04', est: 13, say: 'Os cartões mostram o mês: o faturado, comparado com o mês anterior e com o objetivo, o que recebeste dos clientes, o que pagaste, o saldo do mês, e o que está em atraso.',
+      act: async r => { await kpis(r, ['Faturado', 'Recebido', 'Pago', 'Saldo do mês', 'Em atraso'], 1500); } },
+    { id: 's05', est: 11, say: 'A barra do objetivo do mês mostra quanto já faturaste. A marca preta é onde devias estar hoje. Se a barra está atrás da marca, o mês está atrasado.',
+      act: async r => { const c = card(r, 'Objetivo do mês'); await r.ring(c, 6, 10); const b = await r.box(c); await r.move(b.x + b.width * .2, b.y + b.height * .55, 700); await r.wait(1500); await r.move(b.x + b.width * .48, b.y + b.height * .55, 900); await r.wait(2500); await r.off(); } },
+    { id: 's06', est: 13, say: 'Em precisa de decisão, o sistema junta tudo o que espera por ti: contas em atraso, orçamentos sem financeiro, ruturas de stock, encomendas atrasadas, pedidos dos colaboradores e documentos das viaturas.',
+      act: async r => { const c = card(r, 'Precisa de decisão'); await goTo(r, c); await r.ring(c, 6, 10); await r.wait(500); await r.off(); const cb = await r.box(c); const rs = c.locator('a', { hasText: /Resolver/ }).filter({ visible: true }); const n = await rs.count(); for (let i = 0; i < n; i += 2) { const b = await r.box(rs.nth(i)); await r.move(cb.x + cb.width * .22, b.y + b.height / 2, 380); await r.wait(520); } } },
+    { id: 's07', est: 9, say: 'Cada linha tem o botão Resolver, que te leva direto ao ecrã certo. Por exemplo, os artigos em rutura de stock.',
+      act: async r => { const c = card(r, 'Precisa de decisão'); const b = c.locator('a', { hasText: /Resolver/ }).filter({ visible: true }).nth(5); const row = b.locator('xpath=..'); await r.ring(row, 4, 8); await r.wait(900); await r.off(); await r.ring(b, 6, 10); await r.click(b, 500); await r.off(); await r.settle(1800); } },
+    { id: 's08', est: 9, say: 'Abre o painel do Stock, com as ruturas, onde crias logo as cotações. Depois, voltas ao painel da direção.',
+      act: async r => { const k = card(r, 'Reposição'); if (await k.count()) { await r.ring(k, 6, 10); await r.to(k, 500, .3, .3); await r.wait(900); const rs = k.locator('tr').filter({ hasText: /Rutura/ }); for (let i = 0; i < Math.min(4, await rs.count()); i++) { const b = await r.box(rs.nth(i)); await r.move(b.x + 120, b.y + b.height / 2, 300); await r.wait(250); } await r.off(); } await top(r, 300); await r.menuG('BUSINESS', 'Painel da Direção'); await r.settle(800); } },
+    { id: 's09', est: 14, say: 'Em baixo, cada área da empresa, com semáforos: verde dentro do esperado, amarelo a vigiar, e vermelho a agir. O comercial, com a conversão dos orçamentos, a oficina, com a eficiência e a produtividade, e o financeiro.',
+      act: async r => { await show(r, 'Comercial', 2200, .5); await show(r, 'Oficina', 2200, .5); await show(r, 'Financeiro', 1800, .5); } },
+    { id: 's10', est: 10, say: 'E ainda o stock, as compras, as pessoas, a logística e a frota. Em cada cartão, o botão Abrir leva-te ao painel dessa área.',
+      act: async r => { for (const t of ['Stock', 'Compras', 'Pessoas', 'Logística', 'Frota']) { await show(r, t, 700, .5); } const c = card(r, 'Frota'); const a = c.locator('a', { hasText: /Abrir/ }).first(); await r.ring(a, 5, 8); await r.to(a, 350); await r.wait(900); await r.off(); } },
+    { id: 's11', est: 8, say: 'E nas setas, em cima, vês o painel dos meses anteriores.',
+      act: async r => { await top(r, 700); const p = r.p.locator('#adianti_div_content a:has(.fa-chevron-left), #adianti_div_content a:has(.fa-angle-left)').filter({ visible: true }).first(); await r.ring(p, 6, 10); await r.click(p, 450); await r.off(); await r.settle(1800); const k = kpi(r, 'Faturado'); await r.ring(k, 5, 12); await r.to(k, 350, .4, .5); await r.wait(900); await r.off(); } },
+    { id: 's12', est: 9, say: 'E assim lês o Painel da Direção. No próximo vídeo vamos ao modelo de negócio. Eu sou a Bia, a tua assistente de formação. Até já!',
+      act: async r => { await r.move(1100, 700, 800); } },
+  ],
+};

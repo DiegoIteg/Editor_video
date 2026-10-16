@@ -1,0 +1,12 @@
+rh01|rh01_colaboradores|RECURSOS HUMANOS|1|Colaboradores|A ficha de cada pessoa da equipa e como registar uma nova
+rh03|rh03_mapa_ferias|RECURSOS HUMANOS|3|Mapa de férias|As férias da equipa no ano, dia a dia, e os saldos de cada pessoa
+stk01|stk01_painel_do_dia|STOCK|1|Painel do dia — Stock|O valor do armazém, as faltas, as reservas e os movimentos
+stk04|stk04_reservas_clientes|STOCK|4|Reservas de clientes|Prometer, separar e entregar peças ao cliente
+stk07|stk07_artigos_localizacoes|STOCK|7|Artigos e localizações|Criar um artigo e dizer onde ele mora no armazém
+log01|log01_painel_do_dia|LOGÍSTICA|1|Painel do dia — Logística|Armazéns, frota, equipas e entregas num só ecrã
+log02|log02_armazens_enderecos|LOGÍSTICA|2|Armazéns e endereços|Onde fica cada coisa: armazéns, docas, ruas e prateleiras
+log03|log03_frota|LOGÍSTICA|3|Frota|Viaturas, documentos, quilómetros e manutenções
+log04|log04_equipas_zonas_rotas|LOGÍSTICA|4|Equipas, zonas e rotas|Quem entrega, para onde e por que caminho
+log05|log05_corte_picking|LOGÍSTICA|5|Fila de corte e picking|Da venda concluída à mercadoria separada no armazém
+log06|log06_embalamento_triagem|LOGÍSTICA|6|Embalamento, triagem e viagens|Conferir, encaixotar, separar por zona e planear as viagens
+log07|log07_viagens_torre|LOGÍSTICA|7|Viagens e torre de controlo|Carregar, sair para a rota e acompanhar cada entrega

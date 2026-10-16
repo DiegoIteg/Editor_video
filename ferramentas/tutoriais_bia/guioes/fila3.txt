@@ -1,0 +1,9 @@
+fin03|fin03_contas_receber|FINANCEIRO|3|Contas a receber|Acompanhar e registar os pagamentos dos clientes
+fin04|fin04_contas_pagar|FINANCEIRO|4|Contas a pagar|Fornecedores e despesas pagos a tempo
+fin05|fin05_despesas|FINANCEIRO|5|Despesas fixas e variáveis|Registar as despesas e gerar as contas a pagar
+cmp01|cmp01_painel_de_compras|COMPRAS|1|Painel de compras|O que encomendar, o que está a caminho e o que chegou
+cmp02|cmp02_cotacoes|COMPRAS|2|Cotações|Pedir preços ao fornecedor com a sugestão de compra
+cmp03|cmp03_encomendas|COMPRAS|3|Encomendas|Da cotação à nota de encomenda enviada ao fornecedor
+cmp04|cmp04_receber_mercadoria|COMPRAS|4|Receber mercadoria|Conferir a entrega, dar entrada no stock e avaliar o fornecedor
+cmp05|cmp05_rececoes_devolucoes|COMPRAS|5|Receções e devoluções|Gerar a conta a pagar e devolver ao fornecedor
+cmp06|cmp06_avaliacao_analise|COMPRAS|6|Avaliação de fornecedores|Quem entrega a tempo, completo e conforme — e quanto compras

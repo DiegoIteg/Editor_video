@@ -1,0 +1,8 @@
+prd02|prd02_controlo_producao|PRODUÇÃO|2|Controlo de produção|O quadro da oficina, ao minuto
+prd03|prd03_trabalhar_os|PRODUÇÃO|3|Trabalhar uma ordem de serviço|Etapas, pausas, material, técnico e conclusão
+prd04|prd04_servico_externo|PRODUÇÃO|4|Pedir um serviço externo|Quando parte do trabalho é feita por um fornecedor
+fin01|fin01_painel_do_dia|FINANCEIRO|1|Painel do dia|O que entra, o que sai e o que está atrasado
+fin02|fin02_analise_financeira|FINANCEIRO|2|Análise financeira|O ano em números de gestão
+vnd03|vnd03_lancar_orcamento|VENDAS|3|Lançar um orçamento|Do pedido do cliente ao orçamento guardado
+vnd06|vnd06_configuracoes|VENDAS|6|Configurações de vendas|Tabelas de preços, serviços e hora técnica
+vnd04|vnd04_gerir_orcamentos|VENDAS|4|Gerir orçamentos|Alertas, PDF, follow-up, financeiro e reservas

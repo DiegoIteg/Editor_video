@@ -1,0 +1,7 @@
+stk01|stk01_painel_do_dia|STOCK|1|Painel do dia — Stock|O valor do armazém, as faltas, as reservas e os movimentos
+stk02|stk02_consulta_de_stock|STOCK|2|Consulta de stock|Quanto tens, onde está, e como acertar, transferir e definir mínimos
+stk03|stk03_movimentos|STOCK|3|Movimentos de stock|Todas as entradas e saídas, com origem, documento e quem fez
+stk04|stk04_reservas_clientes|STOCK|4|Reservas de clientes|Prometer, separar e entregar peças ao cliente
+stk05|stk05_reservas_automaticas|STOCK|5|Reservas automáticas|O stock guardado pelos orçamentos e quando o libertar
+stk06|stk06_auditoria|STOCK|6|Auditoria de stock|Anomalias, ajustes por utilizador e o registo de quem fez o quê
+stk07|stk07_artigos_localizacoes|STOCK|7|Artigos e localizações|Criar um artigo e dizer onde ele mora no armazém

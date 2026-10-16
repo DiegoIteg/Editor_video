@@ -1,0 +1,7 @@
+bus01|bus01_painel_direcao|BUSINESS|1|Painel da Direção|O mês da empresa, o que precisa de decisão e cada área com semáforos
+bus02|bus02_modelo_negocio|BUSINESS|2|Modelo de negócio|O que a empresa vende, os setores, o preço por hora e as regras de expedição
+bus03|bus03_plano_anual|BUSINESS|3|Plano anual e real vs objetivo|Objetivos de faturação, orçamento de despesas e como vai o ano
+bus04|bus04_fluxo_caixa_dre|BUSINESS|4|Fluxo de caixa e resultados|O dinheiro que entra e sai, a previsão e a demonstração de resultados
+bus05|bus05_pessoas_direcao|BUSINESS|5|Pessoas: painel, recibos e incentivos|A equipa vista pela direção: alertas, recibos do mês e prémios
+bus06|bus06_custo_producao_rh|BUSINESS|6|Custo × produção e regras de RH|Quanto custa e quanto produz cada pessoa, relatórios, feriados e regras
+bus07|bus07_empresa_integracoes|BUSINESS|7|Dados da empresa e integrações|A ficha da empresa, os e-mails de cada departamento, as filiais e o Moloni

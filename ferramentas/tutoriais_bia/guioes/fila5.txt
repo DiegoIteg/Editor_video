@@ -1,0 +1,8 @@
+rh01|rh01_colaboradores|RECURSOS HUMANOS|1|Colaboradores|A ficha de cada pessoa da equipa e como registar uma nova
+rh02|rh02_ausencias_ferias|RECURSOS HUMANOS|2|Ausências e férias|Registar, aprovar e acompanhar faltas, baixas e férias
+rh03|rh03_mapa_ferias|RECURSOS HUMANOS|3|Mapa de férias|As férias da equipa no ano, dia a dia, e os saldos de cada pessoa
+rh04|rh04_adiantamentos|RECURSOS HUMANOS|4|Adiantamentos|Pedidos dos colaboradores, aprovação, pagamento e desconto no recibo
+rh05|rh05_utilizadores_perfis|RECURSOS HUMANOS|5|Utilizadores e perfis de acesso|Quem entra no Go Auto e o que cada um pode ver e fazer
+fin04|fin04_contas_pagar|FINANCEIRO|4|Contas a pagar|Fornecedores e despesas pagos a tempo
+fin05|fin05_despesas|FINANCEIRO|5|Despesas fixas e variáveis|Registar as despesas e gerar as contas a pagar
+prd03|prd03_trabalhar_os|PRODUÇÃO|3|Trabalhar uma ordem de serviço|Etapas, pausas, material, técnico e conclusão

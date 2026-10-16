@@ -70,10 +70,30 @@ description: "Método aprovado pelo Diego (16/10/2026) para produzir os vídeos 
 4. `node run.js crmNN` (gravação real sincronizada) → `python3 assemble.py ...`.
 5. Controlo de qualidade: folha de contacto a cada 4 s (enquadramento, nada cortado, sem ecrãs de erro/branco, Bia legível),
    loudness ≈ −16 LUFS, títulos com acentos corretos.
-6. Entregar na conversa + gravar em `D:\workspace_claude\go_auto\formacao\<modulo>_bia\` + memória.
+6. Entregar em `D:\workspace_claude\go_auto\formacao\NN_<modulo>\` (01_crm … 09_business) + memória.
 
 ## 7. Nomes e entrega
 - `crm01_painel_do_dia.mp4`, `crm02_prospecao.mp4`, … (módulo + nº + submódulo, sem acentos).
 - Um vídeo por submódulo do menu (exceto ecrãs que o Diego vai retirar — ex.: «Viaturas dos clientes» não tem vídeo).
 - Série CRM (5): `crm01_painel_do_dia`, `crm02_prospecao`, `crm03_clientes`, `crm04_pesquisas_satisfacao`, `crm05_indicadores_qualidade`. Ordem da série: Conta → CRM → Vendas → Produção → restantes.
 - Full HD 1920×1080, 30 fps, H.264 CRF 17, AAC 192 kbps, +faststart.
+
+## 8. Produção em série (aprendido na série completa, out/2026)
+- **Lotes de voz:** `tools/mk_lote.py lote_X guiao1 guiao2…` junta as falas (≤ 5.000 carateres) → gerar no ElevenLabs →
+  `split_voice.py voice/lote_X <n>` → `tools/dist_lote.py lote_X` (reparte por vídeo) → `tools/check_split.py lote_X`
+  (carateres/segundo por cena; fora de 11–19 = verificar o corte). Descarregar sempre pelo leitor/histórico e confirmar o
+  ficheiro novo em ~/Downloads (o nome usa a hora UTC do fim da geração).
+- **Filas de gravação:** `lote_qx.sh fila.txt <porta> "<condição de espera>"` — um servidor PHP por fila; as filas correm
+  **uma de cada vez** (todas usam a mesma base `rec.db`). A condição de espera tem de ser única (ex.: contar a 2.ª ocorrência
+  de `prd03` no `out/lote_q.log`), senão a fila arranca logo e estraga a gravação que está a decorrer.
+- **Nunca correr ensaios `dry` nem sondas enquanto uma fila grava:** a máquina tem 2 núcleos; os ensaios atrasam as ações
+  da gravação e aparecem silêncios longos (ações > voz). Depois de cada vídeo: `grep AVISO out/rec_<id>.log` — diferença
+  > ~3 s numa cena = otimizar o guião ou regravar.
+- **QC:** `./qc.sh <nome>` (duração, 1080p, −16 LUFS, folha de contacto) e ver a folha antes de entregar.
+- **Mapas (Leaflet/OSM)** não carregam sem internet: esconder o cartão do mapa por CSS injetado (`addInitScript`) em vez
+  de mostrar um quadrado vazio; esconder também URLs locais (127.0.0.1) em modais (ex.: QR do motorista).
+- **Menus de 3 níveis** (Business › Análises › RH): a barra lateral só tem 2 níveis — o 3.º faz-se pelos atalhos do ecrã.
+- **Dados da réplica:** a empresa demo chama-se «Oficina Demo, Lda.» (logótipo neutro em `files/1/`); NIF, telefones e
+  redes sociais fictícios. Nada de nomes, NIF ou contactos reais do Diego ou de clientes.
+- Ecrãs com texto em PT-BR ou dados de teste (Subscrição, «Cadastrar», «Tipo pessoa id») não entram nos vídeos sem
+  correção — registam-se como pendente para o Diego.
