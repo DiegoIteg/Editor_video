@@ -63,8 +63,8 @@ module.exports = {
       } },
     { id: 's12', est: 8, say: 'No agendamento marcas a data de início e a data prevista para terminar. É assim que o trabalho entra no planeamento da oficina.',
       act: async r => { await r.off(); await typeDate(r, 'data_inicio', '201020260900'); await typeDate(r, 'data_termino_previsto', '201020261700'); await r.move(1000, 760, 500); } },
-    { id: 's13', est: 7, say: 'No fim, clicas em Salvar. O sistema confirma que o orçamento ficou registado.',
-      act: async r => { const s = btn(r, 'Salvar'); await r.ring(s, 6, 10); await r.click(s, 600); await r.off(); await r.settle(1500); await r.wait(900); } },
+    { id: 's13', est: 7, say: 'No fim, clicas em Gravar. O sistema confirma que o orçamento ficou registado.',
+      act: async r => { const s = btn(r, 'Gravar'); await r.ring(s, 6, 10); await r.click(s, 600); await r.off(); await r.settle(1500); await r.wait(900); } },
     { id: 's14', est: 7, say: 'De volta à lista, o orçamento novo já aparece no topo, em aberto, pronto a enviar ao cliente.',
       act: async r => {
         await r.scrollTo(C, 0, 900); const row = r.p.locator('tbody tr', { hasText: 'Ana Teixeira Carvalho' }).filter({ visible: true }).first();

@@ -23,12 +23,12 @@ module.exports = {
         await r.click(r.el('Buscar', 'a,button,span'), 500); await r.settle(1300);
         const b = await r.box(row(r)); await r.ring(row(r), 4, 8); for (const fx of [.3, .63, .72, .92]) { await r.move(b.x + b.width * fx, b.y + b.height / 2, 330); await r.wait(380); } await r.off();
       } },
-    { id: 's05', est: 10, say: 'Para registar um pagamento, clicas em quitar, escolhes a forma de pagamento, por exemplo, multibanco, confirmas a data e clicas em Salvar.',
+    { id: 's05', est: 10, say: 'Para registar um pagamento, clicas em quitar, escolhes a forma de pagamento, por exemplo, multibanco, confirmas a data e clicas em Gravar.',
       act: async r => {
         const q = row(r).locator(T('Quitar')).first(); await r.ring(q, 8, 8); await r.click(q, 500); await r.off(); await r.settle(1300);
-        await r.pickFast('forma_pagamento_id', /^\s*Multibanco MB\s*$/); await r.wait(300);
+        await r.pickFast('forma_pagamento_id', /^\s*Multibanco\s*$/); await r.wait(300);
         await r.ring(r.p.locator('#adianti_right_panel input[name="data_pagamento"]'), 6, 8); await r.wait(700); await r.off();
-        await r.ring(B(r, 'Salvar'), 6, 10); await r.click(B(r, 'Salvar'), 500); await r.off(); await r.settle(1400);
+        await r.ring(B(r, 'Gravar'), 6, 10); await r.click(B(r, 'Gravar'), 500); await r.off(); await r.settle(1400);
       } },
     { id: 's06', est: 8, say: 'O caixote elimina uma conta lançada por engano. E cada eliminação fica guardada no histórico de exclusões, com quem, quando e porquê.',
       act: async r => { await r.click(btn(r, 'Limpar filtros'), 450); await r.settle(1000); await r.click(btn(r, 'Quitadas'), 450); await r.settle(1100); const e = row(r).locator(T('Eliminar')).first(); await r.ring(e, 8, 8); await r.to(e, 500); await r.wait(1200); await r.off(); } },

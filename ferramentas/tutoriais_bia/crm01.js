@@ -13,10 +13,10 @@ module.exports = {
   scenes: [
     { id: 's01', est: 9, say: 'Olá, eu sou a Bia, a tua assistente de formação, e hoje vou ensinar-te a usar o Painel do dia do CRM, o ecrã onde começa o dia de trabalho de quem gere a oficina.',
       act: async r => { await r.move(1100, 560, 900); await r.wait(5000); } },
-    { id: 's02', est: 10, say: 'Para lá chegar, abres o CRM no menu à esquerda. Aparecem os submódulos: o Painel do dia, a Prospeção, os Clientes, as Viaturas dos clientes e a Pós-venda. Clicamos em Painel do dia.',
+    { id: 's02', est: 10, say: 'Para lá chegar, abres o CRM no menu à esquerda. Aparecem os submódulos: o Painel do dia, a Prospeção, os Clientes e a Pós-venda. Clicamos em Painel do dia.',
       act: async r => {
         await r.click(side(r, 'CRM'), 900); await r.wait(900);
-        const items = ['Painel do dia', 'Prospeção', 'Clientes', 'Viaturas dos clientes', 'Pós-venda'];
+        const items = ['Painel do dia', 'Prospeção', 'Clientes', 'Pós-venda'];
         const boxes = []; for (const t of items) boxes.push(await r.box(side(r, t)));
         const x0 = Math.min(...boxes.map(b => b.x)) - 14, y0 = boxes[0].y - 8, y1 = boxes[boxes.length - 1].y + boxes[boxes.length - 1].height + 8;
         await r.ringXY(x0, y0, 252 - x0, y1 - y0);

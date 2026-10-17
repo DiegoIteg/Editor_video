@@ -21,12 +21,12 @@ module.exports = {
       act: async r => { await r.ring(row(r), 4, 8); await r.wait(500); await r.off(); for (const t of ['Visualiza', 'Etiqueta de produtos', 'Editar', 'Eliminar']) { const i = row(r).locator(T(t)).first(); await r.ring(i, 8, 8); await r.to(i, 350); await r.wait(650); } await r.off(); } },
     { id: 's05', est: 7, say: 'No cifrão geras a conta a pagar desta fatura do fornecedor.',
       act: async r => { const g = row(r).locator(T('Gerar Financeiro')).first(); await r.ring(g, 8, 8); await r.click(g, 500); await r.off(); await r.settle(1500); await r.ring([r.p.locator(RP + 'input[name="fatura"]'), r.p.locator(RP + 'input[name="valor_total"]')], 5, 8); await r.wait(900); await r.off(); } },
-    { id: 's06', est: 13, say: 'Escolhes o grupo, compras de mercadoria, a classificação, variável, a forma de pagamento e a data do primeiro vencimento. Clicas em Gerar parcelas, e depois em Salvar.',
+    { id: 's06', est: 13, say: 'Escolhes o grupo, compras de mercadoria, a classificação, variável, a forma de pagamento e a data do primeiro vencimento. Clicas em Gerar parcelas, e depois em Gravar.',
       act: async r => { await r.pickFast('conta_grupo', 'Compras de mercadoria', 'Compras'); await r.pickFast('conta_classificacao', /^\s*Variável\s*$/, 'Vari'); await r.pickFast('forma_pagamento', /Transfer/i, 'Transf');
         const d = r.p.locator(RP + 'input[name="primeiro_vencimento"]'); await r.click(d, 420); await sleep(150); await r.p.keyboard.press('Control+A'); await r.p.keyboard.press('Backspace'); for (const ch of '15112026') { await r.p.keyboard.type(ch); await sleep(r.dry ? 40 : 100); } await r.p.keyboard.press('Tab'); await r.wait(400);
         await r.ring(B(r, 'Gerar parcelas'), 6, 10); await r.click(B(r, 'Gerar parcelas'), 450); await r.off(); await r.wait(1100);
         await r.ring(r.p.locator(RP + 'input[name="conta_item_compra_item_valor[]"]').first(), 5, 8); await r.wait(700); await r.off();
-        await r.ring(B(r, 'Salvar'), 6, 10); await r.click(B(r, 'Salvar'), 450); await r.off(); await r.wait(1200);
+        await r.ring(B(r, 'Gravar'), 6, 10); await r.click(B(r, 'Gravar'), 450); await r.off(); await r.wait(1200);
         const ok = r.el(/^\s*OK\s*$/, 'button,a'); if (await ok.count()) { await r.click(ok, 400); await r.settle(600); }
         const f = r.p.locator(RP).locator('a, button').filter({ hasText: /Fechar/ }).first(); if (await f.count() && await f.isVisible()) { await r.click(f, 400); await r.settle(800); } } },
     { id: 's07', est: 8, say: 'A conta fica nas contas a pagar do Financeiro, com o vencimento e o alerta.',

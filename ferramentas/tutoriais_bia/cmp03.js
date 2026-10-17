@@ -21,9 +21,9 @@ module.exports = {
       act: async r => { await r.ring(r.p.locator('input[name="pessoa_id"] , select[name="pessoa_id"] + .select2').first(), 6, 8); await r.wait(600); await r.off();
         for (const n of ['quantidade_cotacao', 'preco_unit', 'quantidade_encomenda', 'total']) { const f = r.p.locator(P(n)).first(); await r.ring(f, 5, 8); await r.to(f, 350); await r.wait(700); } await r.off();
         const v = r.p.locator('input[name="valor_total"]'); await r.ring(v, 6, 8); await r.to(v, 400); await r.wait(900); await r.off(); } },
-    { id: 's05', est: 8, say: 'Indicas a data de entrega prevista que o fornecedor te deu, e clicas em Salvar.',
+    { id: 's05', est: 8, say: 'Indicas a data de entrega prevista que o fornecedor te deu, e clicas em Gravar.',
       act: async r => { const d = r.p.locator('input[name="entrega_prevista"]'); await r.click(d, 450); await sleep(150); await r.p.keyboard.press('Control+A'); await r.p.keyboard.press('Backspace'); for (const ch of '21102026') { await r.p.keyboard.type(ch); await sleep(r.dry ? 40 : 100); } await r.p.keyboard.press('Tab'); await r.wait(500);
-        await r.scrollTo('#adianti_content', 99999, 700); const sv = btn(r, 'Salvar'); await r.ring(sv, 6, 10); await r.click(sv, 500); await r.off(); await r.settle(1600); } },
+        await r.scrollTo('#adianti_content', 99999, 700); const sv = btn(r, 'Gravar'); await r.ring(sv, 6, 10); await r.click(sv, 500); await r.off(); await r.settle(1600); } },
     { id: 's06', est: 11, say: 'Aqui estás na lista de encomendas. Os cartões mostram as encomendas por enviar, as que estão a aguardar entrega, as atrasadas, as receções parciais e as recebidas.',
       act: async r => { for (const t of ['POR ENVIAR', 'A AGUARDAR ENTREGA', 'ENTREGA ATRASADA', 'RECEÇÃO PARCIAL', 'RECEBIDAS']) { const k = btn(r, t); await r.ring(k, 5, 12); await r.to(k, 330, .3, .5); await r.wait(850); } await r.off(); } },
     { id: 's07', est: 9, say: 'A nova encomenda está por enviar. No envelope abres o e-mail com a nota de encomenda em PDF, e clicas em Enviar.',

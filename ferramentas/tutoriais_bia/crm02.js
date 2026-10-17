@@ -61,9 +61,9 @@ module.exports = {
         const ed = r.vis('.note-editable'); await r.click(ed, 600); await r.wait(200);
         for (const ch of 'Cliente pediu orçamento para a revisão e para as pastilhas da frente. Ligar na segunda-feira de manhã.') { await r.p.keyboard.type(ch); await r.wait(r.dry ? 0 : 38); }
       } },
-    { id: 's10', est: 8, say: 'Clicas em Salvar. O sistema confirma, e a nova oportunidade aparece no quadro, pronta a ser acompanhada.',
+    { id: 's10', est: 8, say: 'Clicas em Gravar. O sistema confirma, e a nova oportunidade aparece no quadro, pronta a ser acompanhada.',
       act: async r => {
-        await r.ring(r.el('Salvar', 'a,button,span'), 6, 10); await r.click(r.el('Salvar', 'a,button,span'), 600); await r.off(); await r.settle(1000);
+        await r.ring(r.el('Gravar', 'a,button,span'), 6, 10); await r.click(r.el('Gravar', 'a,button,span'), 600); await r.off(); await r.settle(1000);
         const ok = r.el(/^\s*OK\s*$/, 'button,a'); await r.ring(ok, 6, 8); await r.wait(900); await r.off(); await r.click(ok, 500); await r.settle(900);
         const c = cardOf(r, 'Revisão dos 60.000 km'); await c.scrollIntoViewIfNeeded().catch(() => {}); await r.wait(300); await r.ring(c, 4, 10); await r.to(c, 700, .5, .25);
       } },

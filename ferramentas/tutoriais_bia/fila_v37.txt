@@ -1,0 +1,3 @@
+stk08|stk08_inventarios|STOCK|8|Inventários|Contar o armazém, ver as diferenças e acertar o stock
+vnd07|vnd07_consolidacao|VENDAS|7|Consolidação de orçamentos|Vários trabalhos de um parceiro de frota numa só conta
+cmp07|cmp07_fornecedores_transportadores|COMPRAS|7|Fornecedores e transportadores|A ficha de quem te vende e de quem te transporta a mercadoria

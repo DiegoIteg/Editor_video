@@ -27,11 +27,11 @@ module.exports = {
         for (let i = 3; i < n; i++) { const v = await r.p.locator(M('valor_unitario')).nth(i).inputValue(); await r.p.locator(M('recepcao_mercadoria_pv')).nth(i).fill(v); await r.p.locator(M('recepcao_mercadoria_pv')).nth(i).press('Tab'); await sleep(400); } } },
     { id: 's06', est: 8, say: 'No resumo financeiro vês o valor das mercadorias, do imposto, dos descontos e o total da compra.',
       act: async r => { await r.scrollTo(C, 520, 800); const f = r.p.locator('input[name="valor_tota_compra"]'); await r.ring([r.p.locator('input[name="valor_total_produtos"]'), r.p.locator('input[name="valor_total_iva"]'), r.p.locator('input[name="tt_desc_financeiro"]'), f], 5, 8); await r.to(f, 500); await r.wait(1200); await r.off(); } },
-    { id: 's07', est: 10, say: 'No follow-up da receção marcas se a entrega está conforme, escreves uma nota, clicas em Adicionar, e no fim em Salvar.',
+    { id: 's07', est: 10, say: 'No follow-up da receção marcas se a entrega está conforme, escreves uma nota, clicas em Adicionar, e no fim em Gravar.',
       act: async r => { await r.scrollTo(C, 99999, 800); await r.pickFast('followup_logistica_recepcao_mercadoria_status_logistica_id', /^\s*Conforme\s*$/, 'Conf');
         const o = r.p.locator('[name="followup_logistica_recepcao_mercadoria_observacoes"]'); await r.click(o, 400); await r.p.keyboard.type('Embalagens em bom estado e quantidades certas.', { delay: r.dry ? 5 : 35 });
         const a = btn(r, 'Adicionar'); await r.ring(a, 6, 10); await r.click(a, 450); await r.off(); await r.wait(900);
-        await r.scrollTo(C, 99999, 500); const sv = btn(r, 'Salvar'); await r.ring(sv, 6, 10); await r.click(sv, 500); await r.off(); await r.settle(1800); } },
+        await r.scrollTo(C, 99999, 500); const sv = btn(r, 'Gravar'); await r.ring(sv, 6, 10); await r.click(sv, 500); await r.off(); await r.settle(1800); } },
     { id: 's08', est: 12, say: 'A mercadoria entra no stock, e o sistema pede-te logo para avaliares a entrega: o estado das peças, a documentação e uma nota de um a cinco.',
       act: async r => { const ok = r.el(/^\s*OK\s*$/, 'button,a'); if (await ok.count()) { await r.click(ok, 400); await r.settle(600); }
         const h = r.p.locator('#adianti_right_panel').locator('div').filter({ hasText: /encomenda n\.º/ }).last(); await r.ring(h, 5, 8); await r.wait(900); await r.off();

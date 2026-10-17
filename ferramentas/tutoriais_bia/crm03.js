@@ -19,9 +19,9 @@ module.exports = {
         await r.ring(r.p.locator('thead tr').filter({ visible: true }).first(), 4, 8); await r.move(560, 270, 600); await r.wait(500); await r.move(1550, 270, 1500); await r.wait(500);
         await r.off(); await r.scrollTo('#adianti_content', 400, 900); const pg = r.vis('.pagination'); await r.ring(pg, 8, 10); await r.to(pg, 600); await r.wait(600); await r.off(); await r.scrollTo('#adianti_content', 0, 800);
       } },
-    { id: 's04', est: 11, say: 'No topo tens a barra de ações: cadastrar um cliente novo, abrir os filtros, atualizar a lista, limpar os filtros, saltar para a prospeção ou para os orçamentos, e exportar.',
+    { id: 's04', est: 11, say: 'No topo tens a barra de ações: registar um cliente novo, abrir os filtros, atualizar a lista, limpar os filtros, saltar para a prospeção ou para os orçamentos, e exportar.',
       act: async r => {
-        for (const t of ['Cadastrar', 'Filtros', 'Atualizar', 'Limpar filtros', 'Prospecção', 'Orçamentos', 'Exportar']) { await r.ring(btn(r, t), 6, 10); await r.to(btn(r, t), 380); await r.wait(650); }
+        for (const t of ['Novo', 'Filtros', 'Atualizar', 'Limpar filtros', 'Prospecção', 'Orçamentos', 'Exportar']) { await r.ring(btn(r, t), 6, 10); await r.to(btn(r, t), 380); await r.wait(650); }
         await r.off();
       } },
     { id: 's05', est: 13, say: 'Em cada linha tens os atalhos para esse cliente: a lupa para ver a ficha, o lápis para editar, criar logo um orçamento novo, ver todos os orçamentos dele, o histórico de pós-venda e, no fim, eliminar.',
@@ -31,11 +31,11 @@ module.exports = {
         for (let i = 0; i < 6; i++) { await r.ring(ic.nth(i), 8, 8); await r.to(ic.nth(i), 380); await r.wait(1250); }
         await r.off();
       } },
-    { id: 's06', est: 10, say: 'Nos filtros procuras por número, tipo, grupo ou nome. Escrevemos, por exemplo, Oliveira, e clicamos em Buscar. A lista mostra só os clientes com esse nome.',
+    { id: 's06', est: 10, say: 'Nos filtros procuras por número, tipo, grupo ou nome. Escrevemos, por exemplo, Oliveira, e clicamos em Procurar. A lista mostra só os clientes com esse nome.',
       act: async r => {
         await r.click(btn(r, 'Filtros'), 600); await r.settle(800);
         await r.type(r.vis('.offcanvas input[name="nome"], input[name="nome"]'), 'Oliveira', 120); await r.wait(300);
-        await r.click(r.el('Buscar', 'a,button,span'), 600); await r.settle(1300);
+        await r.click(r.el('Procurar', 'a,button,span'), 600); await r.settle(1300);
         await r.ring(r.p.locator('tbody').filter({ visible: true }).first(), 4, 8); await r.move(700, 420, 700);
       } },
     { id: 's07', est: 6, say: 'O número no botão Filtros mostra que há um filtro ativo. Para voltar à lista completa, clicas em Limpar filtros.',
@@ -47,10 +47,10 @@ module.exports = {
         for (const t of ['CSV', 'XLS', 'PDF', 'XML']) { const it = items.filter({ hasText: t }).first(); await r.ring(it, 4, 6); await r.to(it, 380); await r.wait(700); }
         await r.off(); await r.p.keyboard.press('Escape'); await r.move(1100, 160, 500); await r.p.mouse.click(1100, 160); await r.wait(300);
       } },
-    { id: 's09', est: 11, say: 'Vamos registar um cliente novo. Clicas em Cadastrar. Nos dados gerais escolhes o tipo: física, para particulares, ou jurídica, para empresas. E o grupo, que aqui é Clientes.',
+    { id: 's09', est: 11, say: 'Vamos registar um cliente novo. Clicas em Novo. Nos dados gerais escolhes o tipo de entidade: particular, ou empresa. E o grupo, que aqui é Clientes.',
       act: async r => {
-        await r.click(btn(r, 'Cadastrar'), 700); await r.settle(1400);
-        await r.pick('tipo_pessoa_id', 'Jurídica'); await r.wait(400); await r.pick('grupo_pessoa_id', 'Clientes'); await r.wait(300);
+        await r.click(btn(r, 'Novo'), 700); await r.settle(1400);
+        await r.pick('tipo_pessoa_id', 'Empresa'); await r.wait(400); await r.pick('grupo_pessoa_id', 'Clientes'); await r.wait(300);
       } },
     { id: 's10', est: 9, say: 'Na identificação escreves o nome da empresa e o número de contribuinte. O NIF é opcional, mas convém tê-lo para a faturação.',
       act: async r => { await r.type('input[name="nome"]', NOME, 70); await r.wait(300); await r.type('input[name="nif"]', '517248638', 110); } },
@@ -65,16 +65,16 @@ module.exports = {
       } },
     { id: 's12', est: 11, say: 'No separador dos contactos escolhes o tipo de contacto e escreves o telefone fixo ou o telemóvel, e o e-mail. É para aqui que o sistema envia os orçamentos e os avisos ao cliente, por isso confirma sempre o e-mail.',
       act: async r => {
-        await r.off(); await r.click(r.el('CONTATOS', 'a,li,span'), 500); await r.wait(300);
+        await r.off(); await r.click(r.el('CONTACTOS', 'a,li,span'), 500); await r.wait(300);
         await r.pickFast('contatos_pessoa_tipo_contato_id[]', 'Comercial', 'Com');
         await r.type('input[name="contatos_pessoa_movel[]"]', '913 452 781', 55);
         await r.type('input[name="contatos_pessoa_email[]"]', 'geral@autopecasfonseca.exemplo.pt', 32);
       } },
     { id: 's13', est: 8, say: 'Nos Links guardas o site e as redes sociais da empresa, e na Identificação outros documentos fiscais, se precisares.',
       act: async r => { for (const t of ['LINKS', 'IDENTIFICAÇÃO']) { await r.click(r.el(t, 'a,li,span'), 600); await r.wait(1500); } await r.click(r.el('MORADA', 'a,li,span'), 500); } },
-    { id: 's14', est: 7, say: 'No fim, clicas em Salvar. O sistema confirma que o registo ficou guardado.',
+    { id: 's14', est: 7, say: 'No fim, clicas em Gravar. O sistema confirma que o registo ficou guardado.',
       act: async r => {
-        const s = r.el('Salvar', 'a,button,span'); await r.ring(s, 6, 10); await r.click(s, 700); await r.off(); await r.settle(1200);
+        const s = r.el('Gravar', 'a,button,span'); await r.ring(s, 6, 10); await r.click(s, 700); await r.off(); await r.settle(1200);
         const ok = r.el(/^\s*OK\s*$/, 'button,a'); if (await ok.count()) { await r.ring(ok, 6, 8); await r.wait(900); await r.off(); await r.click(ok, 500); await r.settle(900); }
       } },
     { id: 's15', est: 7, say: 'De volta à lista, o novo cliente já aparece no topo, pronto a receber orçamentos.',

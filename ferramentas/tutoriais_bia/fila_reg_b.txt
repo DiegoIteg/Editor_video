@@ -1,0 +1,14 @@
+cmp03|cmp03_encomendas|COMPRAS|3|Encomendas|Da cotação à nota de encomenda enviada ao fornecedor
+cmp04|cmp04_receber_mercadoria|COMPRAS|4|Receber mercadoria|Conferir a entrega, dar entrada no stock e avaliar o fornecedor
+cmp05|cmp05_rececoes_devolucoes|COMPRAS|5|Receções e devoluções|Gerar a conta a pagar e devolver ao fornecedor
+cmp07|cmp07_fornecedores_transportadores|COMPRAS|7|Fornecedores e transportadores|A ficha de quem te vende e de quem te transporta a mercadoria
+stk07|stk07_artigos_localizacoes|STOCK|7|Artigos e localizações|Criar um artigo e dizer onde ele mora no armazém
+rh01|rh01_colaboradores|RECURSOS HUMANOS|1|Colaboradores|A ficha de cada pessoa da equipa e como registar uma nova
+rh02|rh02_ausencias_ferias|RECURSOS HUMANOS|2|Ausências e férias|Registar, aprovar e acompanhar faltas, baixas e férias
+rh03|rh03_mapa_ferias|RECURSOS HUMANOS|3|Mapa de férias|As férias da equipa no ano, dia a dia, e os saldos de cada pessoa
+rh04|rh04_adiantamentos|RECURSOS HUMANOS|4|Adiantamentos|Pedidos dos colaboradores, aprovação, pagamento e desconto no recibo
+rh05|rh05_utilizadores_perfis|RECURSOS HUMANOS|5|Utilizadores e perfis de acesso|Quem entra no Go Auto e o que cada um pode ver e fazer
+bus01|bus01_painel_direcao|BUSINESS|1|Painel da Direção|O mês da empresa, o que precisa de decisão e cada área com semáforos
+bus05|bus05_pessoas_direcao|BUSINESS|5|Pessoas: painel, recibos e incentivos|A equipa vista pela direção: alertas, recibos do mês e prémios
+bus06|bus06_custo_producao_rh|BUSINESS|6|Custo × produção e regras de RH|Quanto custa e quanto produz cada pessoa, relatórios, feriados e regras
+bus07|bus07_empresa_integracoes|BUSINESS|7|Dados da empresa e integrações|A ficha da empresa, os e-mails de cada departamento, as filiais e o Moloni

@@ -1,0 +1,14 @@
+crm01|crm01_painel_do_dia|CRM|1|Painel do dia|O posto de comando do CRM, todos os dias
+crm02|crm02_prospecao|CRM|2|Prospeção|O funil de oportunidades, do contacto ao negócio
+crm03|crm03_clientes|CRM|3|Cadastro de clientes|Registar, consultar e gerir os clientes da oficina
+vnd02|vnd02_funil_comercial|VENDAS|2|Funil comercial|De cada orçamento até à fatura
+vnd03|vnd03_lancar_orcamento|VENDAS|3|Lançar um orçamento|Do pedido do cliente ao orçamento guardado
+vnd05|vnd05_servicos_externos|VENDAS|5|Serviços externos|Os trabalhos feitos fora, sob controlo
+vnd06|vnd06_configuracoes|VENDAS|6|Configurações de vendas|Tabelas de preços, serviços e hora técnica
+prd03|prd03_trabalhar_os|PRODUÇÃO|3|Trabalhar uma ordem de serviço|Etapas, pausas, material, técnico e conclusão
+prd04|prd04_servico_externo|PRODUÇÃO|4|Pedir um serviço externo|Quando parte do trabalho é feita por um fornecedor
+fin01|fin01_painel_do_dia|FINANCEIRO|1|Painel do dia|O que entra, o que sai e o que está atrasado
+fin03|fin03_contas_receber|FINANCEIRO|3|Contas a receber|Acompanhar e registar os pagamentos dos clientes
+fin04|fin04_contas_pagar|FINANCEIRO|4|Contas a pagar|Fornecedores e despesas pagos a tempo
+fin05|fin05_despesas|FINANCEIRO|5|Despesas fixas e variáveis|Registar as despesas e gerar as contas a pagar
+cmp02|cmp02_cotacoes|COMPRAS|2|Cotações|Pedir preços ao fornecedor com a sugestão de compra

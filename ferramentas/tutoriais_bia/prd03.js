@@ -29,12 +29,12 @@ module.exports = {
       act: async r => { await r.click(ic(r, 'Visualiza '), 500); await r.settle(1300); await r.move(1500, 400, 700); await r.wait(700); const p = r.p.locator('#adianti_right_panel .modal-body, #adianti_right_panel form, #adianti_right_panel').first(); await r.p.mouse.wheel(0, 700); await r.wait(600); await r.move(1500, 800, 800); await r.wait(1200); await fechar(r); } },
     { id: 's06', est: 8, say: 'No técnico responsável escolhes quem fica com o carro, por exemplo, o Diogo, e gravas.',
       act: async r => { await toList(r); await r.click(ic(r, 'Técnico responsável'), 500); await r.settle(1100); await r.pickFast('funcionario_id', /^\s*Diogo\s*$/); await r.wait(300); await r.ring(B(r, 'Gravar'), 6, 10); await r.click(B(r, 'Gravar'), 500); await r.off(); await r.settle(1200); } },
-    { id: 's07', est: 11, say: 'No follow-up das etapas incluis a etapa que vai começar: o setor, a etapa, aqui reparação, e uma observação técnica. Ao salvar, o relógio da etapa começa a contar.',
+    { id: 's07', est: 11, say: 'No follow-up das etapas incluis a etapa que vai começar: o setor, a etapa, aqui reparação, e uma observação técnica. Ao gravar, o relógio da etapa começa a contar.',
       act: async r => {
         await toList(r); await r.click(ic(r, FU), 500); await r.settle(1200);
         await r.pickFast('etapa_id', /^\s*REPARAÇÃO\s*$/); await r.wait(200);
         await r.click(RP(r).locator('textarea[name="obs"]'), 400); for (const ch of 'Reparar guarda-lamas da frente.') { await r.p.keyboard.type(ch); await r.wait(30); }
-        await r.ring(B(r, 'Salvar'), 6, 10); await r.click(B(r, 'Salvar'), 500); await r.off(); await r.settle(1300);
+        await r.ring(B(r, 'Gravar'), 6, 10); await r.click(B(r, 'Gravar'), 500); await r.off(); await r.settle(1300);
       } },
     { id: 's08', est: 9, say: 'A etapa fica em curso, com o técnico e a hora de início. Se o trabalho parar, clicas em Pausar, e o tempo parado fica registado à parte.',
       act: async r => { const e = RP(r).locator('table').filter({ hasText: 'REPARAÇÃO' }).first(); await r.ring(e, 6, 8); await r.to(e, 600, .3, .7); await r.wait(900); await r.off(); await r.ring(B(r, 'Pausar'), 6, 10); await r.click(B(r, 'Pausar'), 500); await r.off(); await r.settle(1000); } },

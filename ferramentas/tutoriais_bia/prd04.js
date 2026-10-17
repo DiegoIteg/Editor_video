@@ -37,8 +37,8 @@ module.exports = {
         await r.click(inp(r, FU + 'observacoes'), 400); for (const ch of 'Fornecedor recolhe amanhã de manhã.') { await r.p.keyboard.type(ch); await r.wait(32); }
         await r.ring(btn(r, 'Adicionar'), 6, 10); await r.click(btn(r, 'Adicionar'), 500); await r.off(); await r.wait(900);
       } },
-    { id: 's09', est: 8, say: 'No fim, clicas em Salvar. O pedido aparece na lista dos serviços externos, e entra nos indicadores e alertas.',
-      act: async r => { await r.ring(btn(r, 'Salvar'), 6, 10); await r.click(btn(r, 'Salvar'), 500); await r.off(); await r.settle(1500); await r.scrollTo(C, 0, 800); const row = r.p.locator('tbody tr', { hasText: 'Climatização Auto' }).filter({ visible: true }).first(); await r.ring(row, 4, 8); await r.to(row, 600, .3); } },
+    { id: 's09', est: 8, say: 'No fim, clicas em Gravar. O pedido aparece na lista dos serviços externos, e entra nos indicadores e alertas.',
+      act: async r => { await r.ring(btn(r, 'Gravar'), 6, 10); await r.click(btn(r, 'Gravar'), 500); await r.off(); await r.settle(1500); await r.scrollTo(C, 0, 800); const row = r.p.locator('tbody tr', { hasText: 'Climatização Auto' }).filter({ visible: true }).first(); await r.ring(row, 4, 8); await r.to(row, 600, .3); } },
     { id: 's10', est: 10, say: 'E com isto fica completo o módulo de Produção. No próximo módulo vamos ao Financeiro: contas a pagar, contas a receber e despesas. Eu sou a Bia, a tua assistente de formação. Até já!',
       act: async r => { await r.off(); await r.move(1100, 700, 800); } },
   ],
