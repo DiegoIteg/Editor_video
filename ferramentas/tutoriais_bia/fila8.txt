@@ -1,0 +1,2 @@
+rh05|rh05_utilizadores_perfis|RECURSOS HUMANOS|5|Utilizadores e perfis de acesso|Quem entra no Go Auto e o que cada um pode ver e fazer
+log07|log07_viagens_torre|LOGÍSTICA|7|Viagens e torre de controlo|Carregar, sair para a rota e acompanhar cada entrega

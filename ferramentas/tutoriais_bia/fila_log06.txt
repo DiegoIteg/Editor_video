@@ -1,0 +1,1 @@
+log06|log06_embalamento_triagem|LOGÍSTICA|6|Embalamento, triagem e viagens|Conferir, encaixotar, separar por zona e planear as viagens

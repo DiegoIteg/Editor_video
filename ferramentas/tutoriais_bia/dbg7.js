@@ -1,0 +1,10 @@
+const {Rec,sleep}=require('./engine');
+(async()=>{ const r=new Rec('dbg7',{dry:false}); await r.start(); await r.open('CadastroDeClientesList'); const p=r.p;
+ await r.click(p.locator('tbody tr').first().locator('i').first(),300); await sleep(1500);
+ const f=await r.hit('Fechar','a,button,span');
+ console.log(await f.evaluate(e=>{let n=e;const out=[];for(let i=0;i<4&&n;i++){out.push(n.tagName+' oc='+(n.getAttribute('onclick')||'').slice(0,100));n=n.parentElement;}return out.join('\n');}));
+ await r.click(f,300); await sleep(1500);
+ console.log('drawer visible after mouse click:', await p.locator('text=Consulta registo').isVisible());
+ await f.click().catch(e=>console.log('pwclick err',e.message.slice(0,80))); await sleep(1500);
+ console.log('after pw click:', await p.locator('text=Consulta registo').isVisible());
+ await r.b.close(); })();

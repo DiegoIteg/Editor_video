@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><title>App Go Auto</title>
+<style>
+@font-face{font-family:Pop;src:url(/infografia/Poppins-Bold.ttf);font-weight:700}
+@font-face{font-family:PopM;src:url(/infografia/Poppins-Medium.ttf)}
+@font-face{font-family:Int;src:url(/infografia/Inter-Regular.otf)}
+@font-face{font-family:IntS;src:url(/infografia/Inter-SemiBold.otf)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1300px 900px at 65% 40%,#112a52 0%,#0A1C3A 50%,#061229 100%);color:#EAF0FA;font-family:Int,sans-serif}
+#__cur{display:none!important}
+#brand{position:fixed;left:120px;top:84px;font-family:Pop;font-size:34px}#brand i{display:inline-block;width:5px;height:34px;background:#1FBF3F;margin:0 8px;vertical-align:-5px}#brand span{color:#3FA2FF}
+#side{position:fixed;left:120px;top:210px;width:760px}
+#kick{font-family:IntS;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:#1FBF3F}
+#tt{font-family:Pop;font-size:62px;line-height:1.1;margin-top:14px}
+#sub{font-size:28px;color:#93A4C3;margin-top:18px;line-height:1.4}
+#steps{list-style:none;margin-top:46px;display:flex;flex-direction:column;gap:14px}
+#steps li{font-family:PopM;font-size:26px;color:#6f84a8;display:flex;align-items:center;gap:16px;transition:color .4s}
+#steps li b{width:42px;height:42px;border-radius:12px;background:#14305c;display:flex;align-items:center;justify-content:center;font-family:Pop;font-size:20px;color:#9fb3d6;transition:all .4s;flex:none}
+#steps li.on{color:#fff}#steps li.on b{background:#1FBF3F;color:#fff;box-shadow:0 0 0 6px rgba(31,191,63,.18)}
+#steps li.done{color:#c9d5ea}#steps li.done b{background:#2f5b97;color:#fff}
+#phone{position:fixed;left:1180px;top:38px;width:466px;height:1004px;border-radius:64px;background:#05070c;box-shadow:0 0 0 3px #2a3756,0 40px 90px rgba(0,0,0,.55);padding:18px}
+#screen{position:relative;width:430px;height:968px;border-radius:48px;overflow:hidden;background:#0A1220}
+#notch{position:absolute;left:50%;top:10px;width:120px;height:32px;margin-left:-60px;border-radius:20px;background:#05070c;z-index:5}
+#status{position:absolute;left:0;right:0;top:0;height:50px;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0;font-family:IntS;font-size:16px;color:#fff}
+#urlbar{position:absolute;left:0;right:0;top:50px;height:58px;background:#1f2430;display:none;align-items:center;padding:0 14px;gap:10px;z-index:3}
+#urlbar .u{flex:1;height:38px;border-radius:19px;background:#2d3340;display:flex;align-items:center;padding:0 16px;font-size:16px;color:#e7ecf5;gap:8px}
+#urlbar .u i{color:#8fd19e;font-style:normal}
+#urlbar .m{font-size:22px;color:#cfd6e4;width:24px;text-align:center}
+#app{position:absolute;left:0;top:50px;width:430px;height:918px;border:0;background:#0A1220}
+body.browser #urlbar{display:flex} body.browser #app{top:108px;height:860px}
+#home{position:absolute;inset:0;z-index:6;display:none;background:linear-gradient(160deg,#1d3b6e,#0b1a33 60%,#2b1a4a);padding:90px 30px 0}
+body.home #home{display:block}
+#home .g{display:grid;grid-template-columns:repeat(4,1fr);gap:26px 14px}
+#home .a{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:#fff;font-family:IntS}
+#home .a s{display:block;width:66px;height:66px;border-radius:16px;text-decoration:none}
+#home .a img{width:66px;height:66px;border-radius:16px}
+#home .a.ga{opacity:0;transform:scale(.4);transition:all .6s cubic-bezier(.2,.8,.2,1)} body.installed #home .a.ga{opacity:1;transform:none}
+#dock{position:absolute;left:24px;right:24px;bottom:26px;height:92px;border-radius:30px;background:rgba(255,255,255,.18);display:flex;justify-content:space-around;align-items:center}
+#dock s{width:62px;height:62px;border-radius:16px;display:block}
+#toast{position:absolute;left:24px;right:24px;bottom:150px;z-index:7;background:#fff;color:#0b1a33;border-radius:18px;padding:16px 18px;font-family:IntS;font-size:16px;display:none;box-shadow:0 18px 40px rgba(0,0,0,.4)}
+</style></head><body>
+<div id="brand"><b>GO</b><i></i><span>AUTO</span></div>
+<div id="side"><div id="kick">App Go Auto</div><div id="tt"></div><div id="sub"></div><ul id="steps"></ul></div>
+<div id="phone"><div id="screen">
+  <div id="notch"></div>
+  <div id="status"><span id="hora">9:41</span><span>▂▄▆ 5G ▮</span></div>
+  <div id="urlbar"><span class="m">⌂</span><div class="u"><i>🔒</i><span id="url">goauto.iteg4business.com/app</span></div><span class="m">⋮</span></div>
+  <iframe id="app" src="about:blank"></iframe>
+  <div id="home"><div class="g">
+    <div class="a"><s style="background:#34c759"></s>Telefone</div><div class="a"><s style="background:#0a84ff"></s>Mensagens</div><div class="a"><s style="background:#ff9f0a"></s>Câmara</div><div class="a"><s style="background:#8e8e93"></s>Definições</div>
+    <div class="a"><s style="background:#ff375f"></s>Música</div><div class="a"><s style="background:#5e5ce6"></s>Calendário</div><div class="a"><s style="background:#30b0c7"></s>Mapas</div><div class="a ga" id="gaicon"><img src="/app/icons/icon-192.png">Go Auto</div>
+  </div><div id="dock"><s style="background:#34c759"></s><s style="background:#0a84ff"></s><s style="background:#e5e5ea"></s><s style="background:#ff9f0a"></s></div></div>
+  <div id="toast"></div>
+</div></div>
+<script>
+const $=id=>document.getElementById(id);
+const CURCSS='#__cur svg{display:none!important}#__cur{width:46px!important;height:46px!important;margin:-20px 0 0 -20px;border-radius:50%;background:rgba(255,255,255,.28);border:2px solid rgba(255,255,255,.85);filter:none!important}';
+function hookFrame(){ try{ const d=$('app').contentDocument; if(!d||!d.head) return; if(!d.getElementById('__fingercss')){ const s=d.createElement('style'); s.id='__fingercss'; s.textContent=CURCSS; d.head.appendChild(s);} }catch(e){} }
+$('app').addEventListener('load',()=>{ hookFrame(); setTimeout(hookFrame,300); setTimeout(hookFrame,1200); });
+setInterval(hookFrame,1000);
+window.app={
+  open(u){ $('app').src=u; },
+  mode(m){ document.body.classList.remove('browser','home','installed'); (m||'').split(' ').forEach(x=>x&&document.body.classList.add(x)); },
+  side(t,s,steps,on){ $('tt').textContent=t||''; $('sub').textContent=s||''; if(steps){ $('steps').innerHTML=steps.map((x,i)=>'<li><b>'+(i+1)+'</b>'+x+'</li>').join(''); } this.step(on||0); },
+  step(i){ [...$('steps').children].forEach((li,k)=>{ li.classList.toggle('on',k===i); li.classList.toggle('done',k<i); }); },
+  toast(t){ const e=$('toast'); if(!t){e.style.display='none';return;} e.textContent=t; e.style.display='block'; },
+  frame(){ return $('app').contentWindow; }
+};
+const q=new URLSearchParams(location.search); if(q.get('u')) app.open(q.get('u')); if(q.get('m')) app.mode(q.get('m'));
+</script></body></html>

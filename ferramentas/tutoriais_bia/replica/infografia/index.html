@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><title>Go Auto — visão geral</title>
+<link rel="stylesheet" href="/lib/independent/css/font-awesome.min.css">
+<style>
+@font-face{font-family:Pop;src:url(/infografia/Poppins-Bold.ttf);font-weight:700}
+@font-face{font-family:PopM;src:url(/infografia/Poppins-Medium.ttf)}
+@font-face{font-family:Int;src:url(/infografia/Inter-Regular.otf)}
+@font-face{font-family:IntS;src:url(/infografia/Inter-SemiBold.otf)}
+:root{--navy:#0A1C3A;--navy2:#061229;--ink:#EAF0FA;--mut:#93A4C3;--g:#1FBF3F;--b:#2F6BFF;--y:#E0A800;--r:#FF3B4E;--p:#9C27B0;--c:#14B8C9;--card:#10284F;--line:#1E3A68}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:radial-gradient(1400px 900px at 50% 20%,#112a52 0%,var(--navy) 45%,var(--navy2) 100%);color:var(--ink);font-family:Int,sans-serif}
+body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(1100px 700px at 50% 45%,#000 30%,transparent 80%)}
+#brand{position:fixed;left:72px;top:52px;font-family:Pop;font-size:30px;letter-spacing:.5px}
+#brand b{color:#fff}#brand i{display:inline-block;width:4px;height:30px;background:var(--g);margin:0 6px;vertical-align:-4px}#brand span{color:#3FA2FF}
+.sc{position:fixed;inset:0;opacity:0;pointer-events:none;transition:opacity .7s ease}
+.sc.on{opacity:1}
+.kick{font-family:IntS;font-size:22px;letter-spacing:3px;text-transform:uppercase;color:var(--g);text-align:center;margin-top:150px}
+h1{font-family:Pop;font-size:68px;text-align:center;margin-top:14px;line-height:1.1}
+h1 em{font-style:normal;color:var(--g)}
+.sub{font-family:Int;font-size:28px;color:var(--mut);text-align:center;margin-top:18px}
+.pop{opacity:0;transform:translateY(26px) scale(.96);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.pop.in{opacity:1;transform:none}
+/* tiles */
+.grid{display:grid;gap:26px;justify-content:center;margin-top:70px}
+.tile{width:250px;height:210px;border-radius:22px;background:linear-gradient(180deg,#14305c,#0f2547);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.tile .ic{width:84px;height:84px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:38px;color:#fff}
+.tile .t{font-family:PopM;font-size:24px;text-align:center;line-height:1.15}
+/* antes/depois */
+.ad{display:flex;align-items:center;justify-content:center;gap:90px;margin-top:90px}
+.chaos{position:relative;width:520px;height:420px}
+.chaos .bit{position:absolute;padding:16px 22px;border-radius:16px;background:#1a2f52;border:1px dashed #3a5583;font-family:PopM;font-size:22px;color:#c9d5ea;display:flex;gap:12px;align-items:center}
+.chaos .bit i{font-size:26px;color:var(--y)}
+.arrow{font-size:80px;color:var(--g)}
+.one{width:520px;height:420px;border-radius:30px;background:linear-gradient(160deg,#173a6e,#0f2547);border:2px solid var(--g);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;box-shadow:0 0 80px rgba(31,191,63,.25)}
+.one .wm{font-family:Pop;font-size:64px}.one .wm i{display:inline-block;width:7px;height:56px;background:var(--g);margin:0 10px;vertical-align:-6px}.one .wm span{color:#3FA2FF}
+.one .ls{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;width:420px}
+.one .ls span{font-family:IntS;font-size:20px;background:rgba(255,255,255,.08);border-radius:999px;padding:8px 16px}
+/* fluxo */
+.flow{position:fixed;left:150px;right:150px;top:330px;height:170px}
+.flow .rail{position:absolute;left:60px;right:60px;top:66px;height:6px;background:#1c3561;border-radius:6px;overflow:hidden}
+.flow .rail i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),#3FA2FF);transition:width 1.2s ease}
+.node{position:absolute;top:0;width:136px;margin-left:-68px;display:flex;flex-direction:column;align-items:center;gap:14px;opacity:.35;transition:opacity .5s, transform .5s}
+.node .ic{width:136px;height:136px;border-radius:34px;background:#14305c;border:2px solid #24426f;display:flex;align-items:center;justify-content:center;font-size:52px;color:#9fb3d6;transition:all .5s}
+.node .t{font-family:PopM;font-size:24px;white-space:nowrap}
+.node.done{opacity:.9}.node.done .ic{color:#fff;border-color:#2f5b97}
+.node.cur{opacity:1;transform:translateY(-8px)}.node.cur .ic{background:var(--g);border-color:var(--g);color:#fff;box-shadow:0 0 0 10px rgba(31,191,63,.18),0 20px 50px rgba(31,191,63,.35)}
+.detail{position:fixed;left:50%;top:600px;width:1180px;margin-left:-590px;min-height:250px;border-radius:26px;background:rgba(16,40,79,.92);border:1px solid var(--line);padding:34px 44px;display:flex;gap:36px;align-items:center;opacity:0;transform:translateY(20px);transition:all .5s}
+.detail.in{opacity:1;transform:none}
+.detail .big{width:150px;height:150px;flex:none;border-radius:32px;display:flex;align-items:center;justify-content:center;font-size:66px;color:#fff;background:var(--g)}
+.detail h2{font-family:Pop;font-size:40px;margin-bottom:14px}
+.detail ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.detail li{font-size:27px;color:#d5def0;display:flex;gap:14px;align-items:center;opacity:0;transform:translateX(16px);transition:all .45s}
+.detail li.in{opacity:1;transform:none}
+.detail li:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--g);flex:none}
+.layer{position:fixed;left:150px;right:150px;height:96px;border-radius:24px;display:flex;align-items:center;gap:22px;padding:0 34px;font-family:PopM;font-size:28px;opacity:0;transform:translateY(20px);transition:all .6s}
+.layer.in{opacity:1;transform:none}
+.layer i.fa,.layer i.fas{font-size:38px}
+.layer small{font-family:Int;font-size:24px;color:#d5def0;margin-left:8px}
+#lb{top:190px;background:linear-gradient(90deg,rgba(156,39,176,.35),rgba(47,107,255,.25));border:1px solid rgba(156,39,176,.6)}
+#lr{top:560px;background:linear-gradient(90deg,rgba(224,168,0,.28),rgba(224,168,0,.12));border:1px solid rgba(224,168,0,.55)}
+/* ciclo */
+.cyc{position:fixed;left:50%;top:560px;width:620px;height:620px;margin:-310px 0 0 -310px}
+.cyc svg{position:absolute;inset:0}
+.cyc .n{position:absolute;width:150px;margin:-60px 0 0 -75px;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:PopM;font-size:21px;text-align:center}
+.cyc .n .ic{width:84px;height:84px;border-radius:24px;background:#14305c;border:2px solid #2f5b97;display:flex;align-items:center;justify-content:center;font-size:34px}
+.cyc .mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;font-family:Pop;font-size:42px;line-height:1.15}
+.cyc .mid i{font-style:normal;color:var(--g)}
+/* final */
+.fin{display:flex;justify-content:center;gap:120px;margin-top:110px}
+.fcard{width:560px;height:430px;border-radius:30px;background:linear-gradient(170deg,#173a6e,#0f2547);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center;padding:30px}
+.fcard .ic{font-size:110px;color:var(--g)}
+.fcard h3{font-family:Pop;font-size:40px}
+.fcard p{font-size:26px;color:#c9d5ea}
+</style></head><body>
+<div id="brand"><b>GO</b><i></i><span>AUTO</span></div>
+
+<section class="sc" id="intro"><div class="kick pop" style="margin-top:300px">Apresentação geral</div><h1 class="pop">O que é o <em>Go Auto</em><br>e como funciona</h1><div class="sub pop">Para quem é · os módulos · o fluxo de trabalho de ponta a ponta</div></section>
+
+<section class="sc" id="quem"><div class="kick pop">Para quem é</div><h1 class="pop">Para o mercado <em>automóvel</em></h1>
+<div class="grid" style="grid-template-columns:repeat(6,250px)">
+<div class="tile pop"><div class="ic" style="background:#2F6BFF"><i class="fas fa-wrench"></i></div><div class="t">Mecânica</div></div>
+<div class="tile pop"><div class="ic" style="background:#9C27B0"><i class="fas fa-spray-can"></i></div><div class="t">Chapa<br>e pintura</div></div>
+<div class="tile pop"><div class="ic" style="background:#E0A800"><i class="fas fa-dot-circle"></i></div><div class="t">Pneus</div></div>
+<div class="tile pop"><div class="ic" style="background:#14B8C9"><i class="fas fa-car-side"></i></div><div class="t">Vidros</div></div>
+<div class="tile pop"><div class="ic" style="background:#FF3B4E"><i class="fas fa-bolt"></i></div><div class="t">Eletricidade</div></div>
+<div class="tile pop"><div class="ic" style="background:#1FBF3F"><i class="fas fa-shower"></i></div><div class="t">Lavagem<br>e serviços</div></div>
+</div><div class="sub pop" style="margin-top:56px">Uma oficina, várias oficinas ou várias filiais</div></section>
+
+<section class="sc" id="um"><div class="kick pop">Uma só plataforma</div><h1 class="pop">Tudo no mesmo sítio</h1>
+<div class="ad"><div class="chaos">
+<div class="bit pop" style="left:20px;top:10px;transform:rotate(-6deg)"><i class="fas fa-book"></i>Cadernos</div>
+<div class="bit pop" style="left:250px;top:60px;transform:rotate(5deg)"><i class="fas fa-file-excel"></i>Folhas de Excel</div>
+<div class="bit pop" style="left:40px;top:150px;transform:rotate(3deg)"><i class="fas fa-sticky-note"></i>Papéis soltos</div>
+<div class="bit pop" style="left:260px;top:220px;transform:rotate(-4deg)"><i class="fas fa-phone"></i>Telefonemas</div>
+<div class="bit pop" style="left:30px;top:300px;transform:rotate(-2deg)"><i class="fas fa-desktop"></i>Programas separados</div>
+</div><div class="arrow pop"><i class="fas fa-long-arrow-alt-right"></i></div>
+<div class="one pop"><div class="wm"><b>GO</b><i></i><span>AUTO</span></div><div class="ls"><span>Clientes</span><span>Orçamentos</span><span>Oficina</span><span>Peças</span><span>Dinheiro</span><span>Equipa</span></div></div></div></section>
+
+<section class="sc" id="mods"><div class="kick pop">Os módulos</div><h1 class="pop">Oito módulos, <em>um só sistema</em></h1>
+<div class="grid" style="grid-template-columns:repeat(4,300px);gap:30px;margin-top:60px">
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#2F6BFF"><i class="fas fa-users"></i></div><div class="t">CRM</div></div>
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#FF3B4E"><i class="fas fa-fire"></i></div><div class="t">Vendas</div></div>
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#1FBF3F"><i class="fas fa-car"></i></div><div class="t">Produção</div></div>
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#14B8C9"><i class="fas fa-desktop"></i></div><div class="t">Compras</div></div>
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#E0A800"><i class="fas fa-archive"></i></div><div class="t">Stock</div></div>
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#1FBF3F"><i class="fas fa-dollar-sign"></i></div><div class="t">Financeiro</div></div>
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#E07A00"><i class="fas fa-user-friends"></i></div><div class="t">Recursos Humanos</div></div>
+<div class="tile pop" style="width:300px;height:190px"><div class="ic" style="background:#9C27B0"><i class="fas fa-briefcase"></i></div><div class="t">Business</div></div>
+</div></section>
+
+<section class="sc" id="fluxo"><div class="kick" style="margin-top:96px">O fluxo de trabalho</div>
+<div id="lb" class="layer"><i class="fas fa-briefcase"></i>Business<small>Painel da Direção · plano anual · fluxo de caixa · resultados</small></div>
+<div class="flow"><div class="rail"><i id="rail"></i></div>
+<div class="node" id="n1" style="left:4%"><div class="ic"><i class="fas fa-user-plus"></i></div><div class="t">Cliente</div></div>
+<div class="node" id="n2" style="left:22.4%"><div class="ic"><i class="fas fa-file-invoice"></i></div><div class="t">Orçamento</div></div>
+<div class="node" id="n3" style="left:40.8%"><div class="ic"><i class="fas fa-tools"></i></div><div class="t">Oficina</div></div>
+<div class="node" id="n4" style="left:59.2%"><div class="ic"><i class="fas fa-boxes"></i></div><div class="t">Peças</div></div>
+<div class="node" id="n5" style="left:77.6%"><div class="ic"><i class="fas fa-euro-sign"></i></div><div class="t">Pagamento</div></div>
+<div class="node" id="n6" style="left:96%"><div class="ic"><i class="fas fa-smile"></i></div><div class="t">Pós-venda</div></div>
+</div>
+<div id="lr" class="layer"><i class="fas fa-user-friends"></i>Recursos Humanos<small>férias · ausências · adiantamentos · produção de cada pessoa</small></div>
+<div class="detail" id="det"><div class="big" id="dbig"><i class="fas fa-user-plus"></i></div><div><h2 id="dh"></h2><ul id="dul"></ul></div></div>
+</section>
+
+<section class="sc" id="ciclo"><div class="kick pop" style="margin-top:110px">Um só fluxo</div><h1 class="pop" style="font-size:54px">Sem papel e sem repetir dados</h1>
+<div class="cyc"><svg viewBox="0 0 620 620"><circle cx="310" cy="310" r="230" fill="none" stroke="#1c3561" stroke-width="8"/><circle id="arc" cx="310" cy="310" r="230" fill="none" stroke="#1FBF3F" stroke-width="8" stroke-linecap="round" stroke-dasharray="1445" stroke-dashoffset="1445" transform="rotate(-90 310 310)" style="transition:stroke-dashoffset 4.5s ease"/></svg>
+<div class="mid pop">GO<i>|</i>AUTO</div></div></section>
+
+<section class="sc" id="fim"><div class="kick pop">E mais</div><h1 class="pop">No escritório e <em>no telemóvel</em></h1>
+<div class="fin"><div class="fcard pop"><i class="fas fa-mobile-alt ic"></i><h3>App Go Auto</h3><p>Gestor, técnico, comercial e cliente, cada um com o seu painel no telemóvel</p></div>
+<div class="fcard pop"><i class="fas fa-play-circle ic"></i><h3>Vídeos de formação</h3><p>Em cada módulo, passo a passo, com a Bia</p></div></div></section>
+
+<script>
+const $=id=>document.getElementById(id), T=[];
+const later=(ms,f)=>T.push(setTimeout(f,ms));
+function clear(){T.forEach(clearTimeout);T.length=0;}
+function stagger(sec,ms0,step){[...sec.querySelectorAll('.pop')].forEach((e,i)=>later(ms0+i*step,()=>e.classList.add('in')));}
+function show(id){document.querySelectorAll('.sc').forEach(s=>s.classList.toggle('on',s.id===id));}
+const DET={
+ n1:['fa-user-plus','#2F6BFF','CRM — o cliente',['Registas o cliente e a viatura','Acompanhas cada contacto e oportunidade','Tudo fica na ficha do cliente']],
+ n2:['fa-file-invoice','#FF3B4E','Vendas — o orçamento',['Peças, serviços e horas técnicas','Envias ao cliente por e-mail','Aprovado, segue para a oficina']],
+ n3:['fa-tools','#1FBF3F','Produção — a oficina',['O orçamento vira ordem de serviço','Técnicos registam etapas, tempo e material','Vês em que fase está cada carro']],
+ n4:['fa-boxes','#14B8C9','Compras e Stock — as peças',['Cotações e encomendas aos fornecedores','Receção da mercadoria no armazém','Reserva da peça para o carro certo']],
+ n5:['fa-euro-sign','#1FBF3F','Financeiro — o dinheiro',['Conta a receber e recibo ao cliente','Contas a pagar e despesas a tempo','Tudo a bater certo com o banco']],
+ n6:['fa-smile','#E0A800','Pós-venda — o cliente volta',['Contacto depois da entrega','Pesquisa de satisfação','Indicadores de qualidade']]
+};
+let reached=0;
+function node(k){const i=+k.slice(1);for(let j=1;j<=6;j++){const n=$('n'+j);n.classList.toggle('cur',j===i);n.classList.toggle('done',j<i);}
+ $('rail').style.width=((i-1)/5*100)+'%';const d=DET[k],det=$('det');det.classList.remove('in');
+ later(250,()=>{$('dbig').innerHTML='<i class="fas '+d[0]+'"></i>';$('dbig').style.background=d[1];$('dh').textContent=d[2];$('dul').innerHTML=d[3].map(t=>'<li>'+t+'</li>').join('');det.classList.add('in');[...$('dul').children].forEach((li,x)=>later(700+x*900,()=>li.classList.add('in')));});}
+const CYC=[['fa-user-plus','Cliente'],['fa-file-invoice','Orçamento'],['fa-tools','Oficina'],['fa-boxes','Peças'],['fa-euro-sign','Pagamento'],['fa-smile','Pós-venda']];
+function buildCyc(){const c=document.querySelector('.cyc');c.querySelectorAll('.n').forEach(e=>e.remove());CYC.forEach((x,i)=>{const a=-Math.PI/2+i*2*Math.PI/6,el=document.createElement('div');el.className='n pop';el.style.left=(310+230*Math.cos(a))+'px';el.style.top=(310+230*Math.sin(a)+10)+'px';el.innerHTML='<div class="ic"><i class="fas '+x[0]+'"></i></div>'+x[1];c.appendChild(el);});}
+window.go=function(s){clear();
+ if(s==='intro'){show('intro');stagger($('intro'),200,350);}
+ if(s==='quem'){show('quem');stagger($('quem'),150,420);}
+ if(s==='um'){show('um');stagger($('um'),150,700);}
+ if(s==='mods'){show('mods');stagger($('mods'),150,550);}
+ if(s==='fluxo'){show('fluxo');}
+ if(/^n[1-6]$/.test(s)){show('fluxo');node(s);}
+ if(s==='rh'){show('fluxo');$('lr').classList.add('in');$('det').classList.remove('in');for(let j=1;j<=6;j++){$('n'+j).classList.remove('cur');$('n'+j).classList.add('done');}$('rail').style.width='100%';}
+ if(s==='biz'){show('fluxo');$('lb').classList.add('in');}
+ if(s==='ciclo'){show('ciclo');buildCyc();stagger($('ciclo'),150,450);later(900,()=>{$('arc').style.strokeDashoffset='0';});}
+ if(s==='fim'){show('fim');stagger($('fim'),150,600);}
+};
+</script></body></html>

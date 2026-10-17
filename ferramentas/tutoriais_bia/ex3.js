@@ -1,0 +1,10 @@
+const {Rec,sleep}=require('./engine');
+(async()=>{ const r=new Rec('ex3',{dry:true}); await r.start(); await r.open('GestaoLeadsView'); const p=r.p;
+ await p.screenshot({path:'l0.png'});
+ await r.el(/Nova tarefa/).click(); await sleep(2000); await p.screenshot({path:'l1.png'});
+ console.log(await p.evaluate(()=>[...document.querySelectorAll('input,select,textarea')].filter(e=>e.getBoundingClientRect().width>0).map(e=>e.name+':'+e.type).join(' | ')));
+ await r.open('GestaoLeadsView');
+ const lup=p.locator('.kanban-item, [class*=card], [class*=item]').first();
+ const icons=await p.evaluate(()=>{const c=[...document.querySelectorAll('a,button,i,span')].filter(e=>e.getBoundingClientRect().y>400&&e.getBoundingClientRect().y<500&&e.getBoundingClientRect().x<400);return c.map(e=>e.tagName+'.'+e.className+' t='+(e.title||e.getAttribute('data-original-title')||'')+' oc='+(e.getAttribute('onclick')||'').slice(0,80)+' href='+(e.getAttribute('href')||'').slice(0,80));});
+ console.log(icons.join('\n'));
+ await r.finish(); })();

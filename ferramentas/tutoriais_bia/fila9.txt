@@ -1,0 +1,2 @@
+log06|log06_embalamento_triagem|LOGÍSTICA|6|Embalamento, triagem e viagens|Conferir, encaixotar, separar por zona e planear as viagens
+ger01|ger01_visao_geral|APRESENTAÇÃO|1|O Go Auto em 3 minutos|Para quem é, os módulos e o fluxo de trabalho de ponta a ponta

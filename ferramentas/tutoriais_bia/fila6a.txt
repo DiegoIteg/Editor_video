@@ -1,0 +1,7 @@
+rh05|rh05_utilizadores_perfis|RECURSOS HUMANOS|5|Utilizadores e perfis de acesso|Quem entra no Go Auto e o que cada um pode ver e fazer
+rh01|rh01_colaboradores|RECURSOS HUMANOS|1|Colaboradores|A ficha de cada pessoa da equipa e como registar uma nova
+rh03|rh03_mapa_ferias|RECURSOS HUMANOS|3|Mapa de férias|As férias da equipa no ano, dia a dia, e os saldos de cada pessoa
+stk01|stk01_painel_do_dia|STOCK|1|Painel do dia — Stock|O valor do armazém, as faltas, as reservas e os movimentos
+stk04|stk04_reservas_clientes|STOCK|4|Reservas de clientes|Prometer, separar e entregar peças ao cliente
+stk07|stk07_artigos_localizacoes|STOCK|7|Artigos e localizações|Criar um artigo e dizer onde ele mora no armazém
+log01|log01_painel_do_dia|LOGÍSTICA|1|Painel do dia — Logística|Armazéns, frota, equipas e entregas num só ecrã

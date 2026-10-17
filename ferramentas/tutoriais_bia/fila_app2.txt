@@ -1,0 +1,5 @@
+app02|app02_criar_conta|APP GO AUTO|2|Criar conta e entrar|A tua oficina na app, em dois minutos
+app03|app03_painel_gestor|APP GO AUTO|3|Painel do gestor|A empresa inteira no telemóvel
+app04|app04_painel_tecnico|APP GO AUTO|4|Painel do técnico|O trabalho da oficina, na palma da mão
+app05|app05_painel_comercial|APP GO AUTO|5|Painel do comercial|Orçamentos feitos ao lado do cliente
+log06|log06_embalamento_triagem|LOGÍSTICA|6|Embalamento, triagem e viagens|Conferir, encaixotar, separar por zona e planear as viagens

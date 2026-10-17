@@ -1,0 +1,7 @@
+log02|log02_armazens_enderecos|LOGÍSTICA|2|Armazéns e endereços|Onde fica cada coisa: armazéns, docas, ruas e prateleiras
+log03|log03_frota|LOGÍSTICA|3|Frota|Viaturas, documentos, quilómetros e manutenções
+log04|log04_equipas_zonas_rotas|LOGÍSTICA|4|Equipas, zonas e rotas|Quem entrega, para onde e por que caminho
+log05|log05_corte_picking|LOGÍSTICA|5|Fila de corte e picking|Da venda concluída à mercadoria separada no armazém
+log06|log06_embalamento_triagem|LOGÍSTICA|6|Embalamento, triagem e viagens|Conferir, encaixotar, separar por zona e planear as viagens
+log07|log07_viagens_torre|LOGÍSTICA|7|Viagens e torre de controlo|Carregar, sair para a rota e acompanhar cada entrega
+prd03|prd03_trabalhar_os|PRODUÇÃO|3|Trabalhar uma ordem de serviço|Etapas, pausas, material, técnico e conclusão
